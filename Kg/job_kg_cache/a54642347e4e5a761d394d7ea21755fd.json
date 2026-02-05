@@ -1,0 +1,1281 @@
+{
+  "nodes": [
+    {
+      "id": "Jobposting_后台开发工程师（数据方向）(J28995)",
+      "type": "Jobposting",
+      "properties": {
+        "name": "后台开发工程师（数据方向）(J28995)",
+        "experience_requirement": "['3年以上Hadoop及大数据生态圈实践经验', '3年java开发经验']"
+      }
+    },
+    {
+      "id": "Company_9c37c2",
+      "type": "Company",
+      "properties": {
+        "name": "海信电子信息集团研发中心"
+      }
+    },
+    {
+      "id": "Skill_Hadoop",
+      "type": "Skill",
+      "properties": {
+        "name": "Hadoop",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Hbase",
+      "type": "Skill",
+      "properties": {
+        "name": "HBASE",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Spark",
+      "type": "Skill",
+      "properties": {
+        "name": "SPARK",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Linux",
+      "type": "Skill",
+      "properties": {
+        "name": "Linux",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Shell",
+      "type": "Skill",
+      "properties": {
+        "name": "shell",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Python",
+      "type": "Skill",
+      "properties": {
+        "name": "python",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Java",
+      "type": "Skill",
+      "properties": {
+        "name": "java",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Storm",
+      "type": "Skill",
+      "properties": {
+        "name": "storm",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Sparkstreaming",
+      "type": "Skill",
+      "properties": {
+        "name": "sparkstreaming",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Flink",
+      "type": "Skill",
+      "properties": {
+        "name": "flink",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Kafka",
+      "type": "Skill",
+      "properties": {
+        "name": "Kafka",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Jobposting_软件开发工程师(机器视觉方向）",
+      "type": "Jobposting",
+      "properties": {
+        "name": "软件开发工程师(机器视觉方向）",
+        "experience_requirement": "2年经验"
+      }
+    },
+    {
+      "id": "Company_ec46c5",
+      "type": "Company",
+      "properties": {
+        "name": "武汉横纵智能科技有限公司"
+      }
+    },
+    {
+      "id": "Skill_C++",
+      "type": "Skill",
+      "properties": {
+        "name": "C++",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_图像处理",
+      "type": "Skill",
+      "properties": {
+        "name": "图像处理",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_运动控制",
+      "type": "Skill",
+      "properties": {
+        "name": "运动控制",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Mfc",
+      "type": "Skill",
+      "properties": {
+        "name": "MFC",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Qt",
+      "type": "Skill",
+      "properties": {
+        "name": "QT",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Halcon",
+      "type": "Skill",
+      "properties": {
+        "name": "halcon",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Jobposting_通信工程师",
+      "type": "Jobposting",
+      "properties": {
+        "name": "通信工程师",
+        "experience_requirement": "1年经验"
+      }
+    },
+    {
+      "id": "Company_434172",
+      "type": "Company",
+      "properties": {
+        "name": "武汉洲际电讯科技股份有限公司"
+      }
+    },
+    {
+      "id": "Skill_基站维护",
+      "type": "Skill",
+      "properties": {
+        "name": "基站维护",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_通信技术",
+      "type": "Skill",
+      "properties": {
+        "name": "通信技术",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Jobposting_Java开发工程师",
+      "type": "Jobposting",
+      "properties": {
+        "name": "Java开发工程师",
+        "experience_requirement": "1年经验"
+      }
+    },
+    {
+      "id": "Company_ab238c",
+      "type": "Company",
+      "properties": {
+        "name": "武汉星际互动智能技术有限公司"
+      }
+    },
+    {
+      "id": "Skill_Html5",
+      "type": "Skill",
+      "properties": {
+        "name": "HTML5",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Css",
+      "type": "Skill",
+      "properties": {
+        "name": "CSS",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Sql",
+      "type": "Skill",
+      "properties": {
+        "name": "SQL",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Spring Mvc",
+      "type": "Skill",
+      "properties": {
+        "name": "Spring MVC",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Ssh",
+      "type": "Skill",
+      "properties": {
+        "name": "SSH",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Jobposting_渠道销售/销售代表",
+      "type": "Jobposting",
+      "properties": {
+        "name": "渠道销售/销售代表",
+        "experience_requirement": "2年经验"
+      }
+    },
+    {
+      "id": "Company_a7c70a",
+      "type": "Company",
+      "properties": {
+        "name": "英莱德科技股份公司"
+      }
+    },
+    {
+      "id": "Skill_系统集成",
+      "type": "Skill",
+      "properties": {
+        "name": "系统集成",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_弱电智能化",
+      "type": "Skill",
+      "properties": {
+        "name": "弱电智能化",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Jobposting_C、C++软件工程师",
+      "type": "Jobposting",
+      "properties": {
+        "name": "C、C++软件工程师",
+        "experience_requirement": "3-4年经验"
+      }
+    },
+    {
+      "id": "Company_f73238",
+      "type": "Company",
+      "properties": {
+        "name": "湖北瑞丰科技发展有限公司"
+      }
+    },
+    {
+      "id": "Skill_Vxworks",
+      "type": "Skill",
+      "properties": {
+        "name": "VxWorks",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Wince",
+      "type": "Skill",
+      "properties": {
+        "name": "WINCE",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Stl",
+      "type": "Skill",
+      "properties": {
+        "name": "STL",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Socket",
+      "type": "Skill",
+      "properties": {
+        "name": "Socket",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Tcp/Ip",
+      "type": "Skill",
+      "properties": {
+        "name": "TCP/IP",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Sql Server",
+      "type": "Skill",
+      "properties": {
+        "name": "Sql Server",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Mysql",
+      "type": "Skill",
+      "properties": {
+        "name": "mysql",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Jobposting_采购专员",
+      "type": "Jobposting",
+      "properties": {
+        "name": "采购专员",
+        "experience_requirement": "3-4年经验"
+      }
+    },
+    {
+      "id": "Company_af4d2f",
+      "type": "Company",
+      "properties": {
+        "name": "武汉钧恒科技有限公司"
+      }
+    },
+    {
+      "id": "Jobposting_Java开发工程师(J10207)",
+      "type": "Jobposting",
+      "properties": {
+        "name": "Java开发工程师(J10207)",
+        "experience_requirement": "3-4年经验"
+      }
+    },
+    {
+      "id": "Company_4e3b0c",
+      "type": "Company",
+      "properties": {
+        "name": "上海百胜软件股份有限公司"
+      }
+    },
+    {
+      "id": "Skill_Springboot",
+      "type": "Skill",
+      "properties": {
+        "name": "springboot",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Springcloud",
+      "type": "Skill",
+      "properties": {
+        "name": "springcloud",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Mybatis",
+      "type": "Skill",
+      "properties": {
+        "name": "mybatis",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Git",
+      "type": "Skill",
+      "properties": {
+        "name": "git",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Mysql",
+      "type": "Skill",
+      "properties": {
+        "name": "MySQL",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Sql Server",
+      "type": "Skill",
+      "properties": {
+        "name": "SQL Server",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Vue",
+      "type": "Skill",
+      "properties": {
+        "name": "vue",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Jobposting_系统架构师",
+      "type": "Jobposting",
+      "properties": {
+        "name": "系统架构师",
+        "experience_requirement": "5-7年经验"
+      }
+    },
+    {
+      "id": "Company_e7ea94",
+      "type": "Company",
+      "properties": {
+        "name": "湖北晋楚科技发展有限公司"
+      }
+    },
+    {
+      "id": "Skill_Soa",
+      "type": "Skill",
+      "properties": {
+        "name": "SOA",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Dubbo",
+      "type": "Skill",
+      "properties": {
+        "name": "Dubbo",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Oracle",
+      "type": "Skill",
+      "properties": {
+        "name": "Oracle",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Docker",
+      "type": "Skill",
+      "properties": {
+        "name": "Docker",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Hive",
+      "type": "Skill",
+      "properties": {
+        "name": "Hive",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Elasticsearch",
+      "type": "Skill",
+      "properties": {
+        "name": "Elasticsearch",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Zookeeper",
+      "type": "Skill",
+      "properties": {
+        "name": "Zookeeper",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_Activemq",
+      "type": "Skill",
+      "properties": {
+        "name": "ActiveMQ",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_分布式技术",
+      "type": "Skill",
+      "properties": {
+        "name": "分布式技术",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Skill_微服务架构",
+      "type": "Skill",
+      "properties": {
+        "name": "微服务架构",
+        "skill_type": "技术"
+      }
+    },
+    {
+      "id": "Jobposting_园区运营专员",
+      "type": "Jobposting",
+      "properties": {
+        "name": "园区运营专员",
+        "experience_requirement": "1年经验"
+      }
+    },
+    {
+      "id": "Company_fd1e91",
+      "type": "Company",
+      "properties": {
+        "name": "武汉普天孵化器管理有限公司"
+      }
+    },
+    {
+      "id": "Location_ad9efa",
+      "type": "Location",
+      "properties": {
+        "name": "武汉市",
+        "city": "武汉"
+      }
+    },
+    {
+      "id": "Location_00ed76",
+      "type": "Location",
+      "properties": {
+        "name": "湖北省",
+        "province": "湖北"
+      }
+    },
+    {
+      "id": "Location_e94e8b",
+      "type": "Location",
+      "properties": {
+        "name": "上海市",
+        "city": "上海"
+      }
+    },
+    {
+      "id": "Year_2022",
+      "type": "Year",
+      "properties": {
+        "name": "2022"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "source": "Jobposting_后台开发工程师（数据方向）(J28995)",
+      "target": "Company_9c37c2",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_后台开发工程师（数据方向）(J28995)",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_9c37c2",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_后台开发工程师（数据方向）(J28995)",
+      "target": "Skill_Hadoop",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "精通"
+      }
+    },
+    {
+      "source": "Jobposting_后台开发工程师（数据方向）(J28995)",
+      "target": "Skill_Hbase",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_后台开发工程师（数据方向）(J28995)",
+      "target": "Skill_Spark",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "精通"
+      }
+    },
+    {
+      "source": "Jobposting_后台开发工程师（数据方向）(J28995)",
+      "target": "Skill_Linux",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_后台开发工程师（数据方向）(J28995)",
+      "target": "Skill_Shell",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "具备"
+      }
+    },
+    {
+      "source": "Jobposting_后台开发工程师（数据方向）(J28995)",
+      "target": "Skill_Python",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "具备"
+      }
+    },
+    {
+      "source": "Jobposting_后台开发工程师（数据方向）(J28995)",
+      "target": "Skill_Java",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "具有3年"
+      }
+    },
+    {
+      "source": "Jobposting_后台开发工程师（数据方向）(J28995)",
+      "target": "Skill_Storm",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "精通"
+      }
+    },
+    {
+      "source": "Jobposting_后台开发工程师（数据方向）(J28995)",
+      "target": "Skill_Sparkstreaming",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "精通"
+      }
+    },
+    {
+      "source": "Jobposting_后台开发工程师（数据方向）(J28995)",
+      "target": "Skill_Flink",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "精通"
+      }
+    },
+    {
+      "source": "Jobposting_后台开发工程师（数据方向）(J28995)",
+      "target": "Skill_Kafka",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_软件开发工程师(机器视觉方向）",
+      "target": "Company_ec46c5",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_软件开发工程师(机器视觉方向）",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_ec46c5",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_软件开发工程师(机器视觉方向）",
+      "target": "Skill_C++",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_软件开发工程师(机器视觉方向）",
+      "target": "Skill_图像处理",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "能独立进行"
+      }
+    },
+    {
+      "source": "Jobposting_软件开发工程师(机器视觉方向）",
+      "target": "Skill_运动控制",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "能独立进行"
+      }
+    },
+    {
+      "source": "Jobposting_软件开发工程师(机器视觉方向）",
+      "target": "Skill_Mfc",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "较为丰富"
+      }
+    },
+    {
+      "source": "Jobposting_软件开发工程师(机器视觉方向）",
+      "target": "Skill_Qt",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "较为丰富"
+      }
+    },
+    {
+      "source": "Jobposting_软件开发工程师(机器视觉方向）",
+      "target": "Skill_Halcon",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "了解"
+      }
+    },
+    {
+      "source": "Jobposting_通信工程师",
+      "target": "Company_434172",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_通信工程师",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_434172",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_通信工程师",
+      "target": "Skill_基站维护",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "1年以上"
+      }
+    },
+    {
+      "source": "Jobposting_通信工程师",
+      "target": "Skill_通信技术",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "了解"
+      }
+    },
+    {
+      "source": "Jobposting_Java开发工程师",
+      "target": "Company_ab238c",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Java开发工程师",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_ab238c",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Java开发工程师",
+      "target": "Skill_Java",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_Java开发工程师",
+      "target": "Skill_Html5",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_Java开发工程师",
+      "target": "Skill_Css",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_Java开发工程师",
+      "target": "Skill_Sql",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_Java开发工程师",
+      "target": "Skill_Spring Mvc",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_Java开发工程师",
+      "target": "Skill_Ssh",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_渠道销售/销售代表",
+      "target": "Company_a7c70a",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_渠道销售/销售代表",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_a7c70a",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_渠道销售/销售代表",
+      "target": "Skill_系统集成",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "了解"
+      }
+    },
+    {
+      "source": "Jobposting_渠道销售/销售代表",
+      "target": "Skill_弱电智能化",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "了解"
+      }
+    },
+    {
+      "source": "Jobposting_C、C++软件工程师",
+      "target": "Company_f73238",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_C、C++软件工程师",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_f73238",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_C、C++软件工程师",
+      "target": "Skill_C++",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练掌握"
+      }
+    },
+    {
+      "source": "Jobposting_C、C++软件工程师",
+      "target": "Skill_Vxworks",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "有过"
+      }
+    },
+    {
+      "source": "Jobposting_C、C++软件工程师",
+      "target": "Skill_Wince",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "有过"
+      }
+    },
+    {
+      "source": "Jobposting_C、C++软件工程师",
+      "target": "Skill_Stl",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_C、C++软件工程师",
+      "target": "Skill_Socket",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_C、C++软件工程师",
+      "target": "Skill_Tcp/Ip",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_C、C++软件工程师",
+      "target": "Skill_Sql Server",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练使用"
+      }
+    },
+    {
+      "source": "Jobposting_C、C++软件工程师",
+      "target": "Skill_Mysql",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练使用"
+      }
+    },
+    {
+      "source": "Jobposting_采购专员",
+      "target": "Company_af4d2f",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_采购专员",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_af4d2f",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Java开发工程师(J10207)",
+      "target": "Company_4e3b0c",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Java开发工程师(J10207)",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_4e3b0c",
+      "target": "Location_e94e8b",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Java开发工程师(J10207)",
+      "target": "Skill_Java",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "精通"
+      }
+    },
+    {
+      "source": "Jobposting_Java开发工程师(J10207)",
+      "target": "Skill_Springboot",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "精通"
+      }
+    },
+    {
+      "source": "Jobposting_Java开发工程师(J10207)",
+      "target": "Skill_Springcloud",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "精通"
+      }
+    },
+    {
+      "source": "Jobposting_Java开发工程师(J10207)",
+      "target": "Skill_Mybatis",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "精通"
+      }
+    },
+    {
+      "source": "Jobposting_Java开发工程师(J10207)",
+      "target": "Skill_Git",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_Java开发工程师(J10207)",
+      "target": "Skill_Mysql",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练掌握"
+      }
+    },
+    {
+      "source": "Jobposting_Java开发工程师(J10207)",
+      "target": "Skill_Sql Server",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练掌握"
+      }
+    },
+    {
+      "source": "Jobposting_Java开发工程师(J10207)",
+      "target": "Skill_Vue",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_系统架构师",
+      "target": "Company_e7ea94",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_系统架构师",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_e7ea94",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_系统架构师",
+      "target": "Skill_Java",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "5年以上"
+      }
+    },
+    {
+      "source": "Jobposting_系统架构师",
+      "target": "Skill_Soa",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_系统架构师",
+      "target": "Skill_Dubbo",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_系统架构师",
+      "target": "Skill_Oracle",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "精通"
+      }
+    },
+    {
+      "source": "Jobposting_系统架构师",
+      "target": "Skill_Mysql",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "精通"
+      }
+    },
+    {
+      "source": "Jobposting_系统架构师",
+      "target": "Skill_Docker",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_系统架构师",
+      "target": "Skill_Hive",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "具备"
+      }
+    },
+    {
+      "source": "Jobposting_系统架构师",
+      "target": "Skill_Elasticsearch",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "具备"
+      }
+    },
+    {
+      "source": "Jobposting_系统架构师",
+      "target": "Skill_Zookeeper",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "具备"
+      }
+    },
+    {
+      "source": "Jobposting_系统架构师",
+      "target": "Skill_Activemq",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "具备"
+      }
+    },
+    {
+      "source": "Jobposting_系统架构师",
+      "target": "Skill_分布式技术",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "有经验"
+      }
+    },
+    {
+      "source": "Jobposting_系统架构师",
+      "target": "Skill_微服务架构",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "深刻理解"
+      }
+    },
+    {
+      "source": "Jobposting_园区运营专员",
+      "target": "Company_fd1e91",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_园区运营专员",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_fd1e91",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_后台开发工程师（数据方向）(J28995)",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_软件开发工程师(机器视觉方向）",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_通信工程师",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Java开发工程师",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_渠道销售/销售代表",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_C、C++软件工程师",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_采购专员",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Java开发工程师(J10207)",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_系统架构师",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_园区运营专员",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    }
+  ],
+  "metadata": {
+    "id": 22,
+    "job_title": "软件开发工程师(机器视觉方向）",
+    "company_name": "武汉横纵智能科技有限公司",
+    "salary_range": "0.8-1.5万/月",
+    "location": "武汉-东西湖区",
+    "openings": 1,
+    "requirements": "[', '1、', '公司主要从事工业视觉定位控制系统的研发、销售和服务 ，同时为行业客户提供客制化的解决方案。 经过这些年的实践和努力， 我们在机器视觉应用领域上积累了丰富的经验，拥有了许多成功案例和成熟方案 ， 建立了科学规范的管理体系，形成了一支在同行业专业领域里有着较高知名度和竞争实力的团队。', '【工作地点】：湖北武汉', '【岗位职责】：', '\\xa01.图像处理，运动控制，算法，windows下多线程多进程开发；', '2.根据项目计划，在保质保量的前提下，按时完成开发任务；', '3.负责相关产品的功能模块设计，负责相关产品的功能模块设计；', '4.解决产品开发中发现的问题；', '5.负责产品文档的撰写；', '6.负责编写产品的核心代码；', '【任职要求】：', '1本科及以上学历、计算机专业优先；', '2.具有良好的团队合作意识以及良好的适应能力；', '3.具有良好的逻辑思维能力、沟通能力；', '4.有很强的学习能力，吃苦耐劳，责任心强；', '5.善于发现问题所在，可以及时解决问题；', '6有较为丰富应用MFC、QT开发经验的优先', '7.能独立进行图形图像处理的、运动控制的优先', '【我们提供给你】\\xa0薪资待遇月，每年至少一次调薪机会，年终奖\\xa0性能强大的机器设备、业界前沿资料和书籍\\xa0其它福利：五险一金、团建活动、节日礼品等\\xa0', '【岗位亮点】 作为软件开发工程师 你将进入尖端的智能制造行业，接触最前沿的人工智能技术与知识 你将在开发团队中积累软件开发知识提高自身能力，同时有广阔的空间充分发挥聪明才智 你将从事复杂的软件设计工作，并使用尖端技术不断提高机器视觉性能，使它在市场上保持高度竞争力 .', '上班时间：9:00-11:30\\xa0 13:30-18:00', '月休：6天，大小休', '职能类别：', '软件工程师', '关键字：', '软件工程师', 'C++', '图像处理', '运动控制', 'halcon]2年经验, 本科",
+    "search_keyword": "计算机软件",
+    "data_year": 2022,
+    "created_at": "2025-05-01 15:37:15"
+  },
+  "success": true,
+  "error_msg": ""
+}

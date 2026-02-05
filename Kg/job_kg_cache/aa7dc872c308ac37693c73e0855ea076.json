@@ -1,0 +1,1563 @@
+{
+  "nodes": [
+    {
+      "id": "Jobposting_C++_Wheyl",
+      "type": "Jobposting",
+      "properties": {
+        "name": "C++开发工程师",
+        "experience_requirement": "3-4年经验"
+      }
+    },
+    {
+      "id": "Company_e4e8b2",
+      "type": "Company",
+      "properties": {
+        "name": "武汉文网亿联科技有限公司"
+      }
+    },
+    {
+      "id": "Skill_Linux_C_Cpp",
+      "type": "Skill",
+      "properties": {
+        "name": "Linux C/C++",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Multithreading",
+      "type": "Skill",
+      "properties": {
+        "name": "多线程",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Tcp_Udp",
+      "type": "Skill",
+      "properties": {
+        "name": "tcp/udp网络编程",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Rpc",
+      "type": "Skill",
+      "properties": {
+        "name": "rpc协议编程",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Design_Patterns",
+      "type": "Skill",
+      "properties": {
+        "name": "常用设计模式",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Network_Architecture",
+      "type": "Skill",
+      "properties": {
+        "name": "网络技术架构",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_High_Concurrency",
+      "type": "Skill",
+      "properties": {
+        "name": "高并发",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Traffic_Control",
+      "type": "Skill",
+      "properties": {
+        "name": "流量控制",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Network_Optimization",
+      "type": "Skill",
+      "properties": {
+        "name": "网络优化",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Streaming_Protocol",
+      "type": "Skill",
+      "properties": {
+        "name": "流媒体网络传输协议",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Performance_Optimization",
+      "type": "Skill",
+      "properties": {
+        "name": "性能优化方法和工具",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Distributed_Systems",
+      "type": "Skill",
+      "properties": {
+        "name": "大规模分布式系统应用架构设计",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Business_Analysis",
+      "type": "Skill",
+      "properties": {
+        "name": "理解和分析业务需求能力",
+        "skill_type": "Soft"
+      }
+    },
+    {
+      "id": "Skill_Communication",
+      "type": "Skill",
+      "properties": {
+        "name": "沟通和团队协作能力",
+        "skill_type": "Soft"
+      }
+    },
+    {
+      "id": "Skill_Learning_Ability",
+      "type": "Skill",
+      "properties": {
+        "name": "学习能力",
+        "skill_type": "Soft"
+      }
+    },
+    {
+      "id": "Skill_Network_Programming",
+      "type": "Skill",
+      "properties": {
+        "name": "网络编程",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Jobposting_Sales_Engineer_Ketian",
+      "type": "Jobposting",
+      "properties": {
+        "name": "销售工程师",
+        "experience_requirement": "1年经验",
+        "salary": "月底薪3000-8000元；业务提成年薪20-30万（中等业绩）左右"
+      }
+    },
+    {
+      "id": "Company_ea6d4f",
+      "type": "Company",
+      "properties": {
+        "name": "武汉科天科技有限公司"
+      }
+    },
+    {
+      "id": "Skill_Market_Development",
+      "type": "Skill",
+      "properties": {
+        "name": "开拓市场",
+        "skill_type": "Soft"
+      }
+    },
+    {
+      "id": "Skill_Customer_Retention",
+      "type": "Skill",
+      "properties": {
+        "name": "维系老客户",
+        "skill_type": "Soft"
+      }
+    },
+    {
+      "id": "Skill_Problem_Solving",
+      "type": "Skill",
+      "properties": {
+        "name": "分析问题和解决问题的能力",
+        "skill_type": "Soft"
+      }
+    },
+    {
+      "id": "Jobposting_Huawei_Distributor_Manager",
+      "type": "Jobposting",
+      "properties": {
+        "name": "华为网络产品分销经理（武汉）",
+        "experience_requirement": "3-4年经验",
+        "salary": "底薪，提成透明，上不封顶"
+      }
+    },
+    {
+      "id": "Company_a023ef",
+      "type": "Company",
+      "properties": {
+        "name": "武汉宽路信息科技有限公司"
+      }
+    },
+    {
+      "id": "Skill_Channel_Sales",
+      "type": "Skill",
+      "properties": {
+        "name": "渠道市场",
+        "skill_type": "Soft"
+      }
+    },
+    {
+      "id": "Skill_Sales_Strategy",
+      "type": "Skill",
+      "properties": {
+        "name": "销售策略",
+        "skill_type": "Soft"
+      }
+    },
+    {
+      "id": "Skill_Project_Tracking",
+      "type": "Skill",
+      "properties": {
+        "name": "集成项目跟踪",
+        "skill_type": "Soft"
+      }
+    },
+    {
+      "id": "Skill_Business_Proposal",
+      "type": "Skill",
+      "properties": {
+        "name": "撰写商务方案",
+        "skill_type": "Soft"
+      }
+    },
+    {
+      "id": "Skill_It_Channel_Market",
+      "type": "Skill",
+      "properties": {
+        "name": "湖北省内武汉或各地市IT渠道分销市场",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Huawei_Devices",
+      "type": "Skill",
+      "properties": {
+        "name": "华为网络设备",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_H3C_Devices",
+      "type": "Skill",
+      "properties": {
+        "name": "H3C网络设备",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Sangfor_Devices",
+      "type": "Skill",
+      "properties": {
+        "name": "深信服网络设备",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Ruijie_Devices",
+      "type": "Skill",
+      "properties": {
+        "name": "锐捷网络设备",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Jobposting_Field_Ops_Engineer",
+      "type": "Jobposting",
+      "properties": {
+        "name": "驻场运维工程师（黄冈）",
+        "experience_requirement": "2年经验"
+      }
+    },
+    {
+      "id": "Company_50bc16",
+      "type": "Company",
+      "properties": {
+        "name": "武汉市天鸿在线科技有限责任公司"
+      }
+    },
+    {
+      "id": "Skill_Security_Response",
+      "type": "Skill",
+      "properties": {
+        "name": "安全风险响应",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_System_Upgrade",
+      "type": "Skill",
+      "properties": {
+        "name": "安全设备系统升级",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Security_Policy",
+      "type": "Skill",
+      "properties": {
+        "name": "安全策略管理",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Security_Monitoring",
+      "type": "Skill",
+      "properties": {
+        "name": "安全设备监控",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Windows_Linux",
+      "type": "Skill",
+      "properties": {
+        "name": "Windows、Linux操作系统",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Desktop_Support",
+      "type": "Skill",
+      "properties": {
+        "name": "大型办公网络桌面运维",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Office_Software",
+      "type": "Skill",
+      "properties": {
+        "name": "主流办公软件及专业软件维护",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Security_Awareness",
+      "type": "Skill",
+      "properties": {
+        "name": "网络安全防范意识",
+        "skill_type": "Soft"
+      }
+    },
+    {
+      "id": "Jobposting_Market_Expansion_Specialist",
+      "type": "Jobposting",
+      "properties": {
+        "name": "市场拓展专员",
+        "experience_requirement": "无需经验"
+      }
+    },
+    {
+      "id": "Company_d9d3fe",
+      "type": "Company",
+      "properties": {
+        "name": "湖北彩豹科技有限公司"
+      }
+    },
+    {
+      "id": "Skill_Channel_Expansion",
+      "type": "Skill",
+      "properties": {
+        "name": "线下渠道拓展",
+        "skill_type": "Soft"
+      }
+    },
+    {
+      "id": "Skill_Retail_Operations",
+      "type": "Skill",
+      "properties": {
+        "name": "小微零售、便利连锁及商业综合体运营",
+        "skill_type": "Soft"
+      }
+    },
+    {
+      "id": "Skill_Market_Research",
+      "type": "Skill",
+      "properties": {
+        "name": "市场动态与消费者行为分析",
+        "skill_type": "Soft"
+      }
+    },
+    {
+      "id": "Skill_Store_Management",
+      "type": "Skill",
+      "properties": {
+        "name": "实体店经营模式研究",
+        "skill_type": "Soft"
+      }
+    },
+    {
+      "id": "Skill_Fmcg_Experience",
+      "type": "Skill",
+      "properties": {
+        "name": "快消品、耐消品行业渠道建设",
+        "skill_type": "Soft"
+      }
+    },
+    {
+      "id": "Jobposting_Technical_Engineer_Xinchuan",
+      "type": "Jobposting",
+      "properties": {
+        "name": "技术工程师",
+        "experience_requirement": "3-4年经验"
+      }
+    },
+    {
+      "id": "Company_0b3f7f",
+      "type": "Company",
+      "properties": {
+        "name": "湖北省信产通信服务有限公司数字科技分公司"
+      }
+    },
+    {
+      "id": "Skill_Presales_Support",
+      "type": "Skill",
+      "properties": {
+        "name": "售前资料及培训",
+        "skill_type": "Soft"
+      }
+    },
+    {
+      "id": "Skill_Business_Opportunity",
+      "type": "Skill",
+      "properties": {
+        "name": "商机签约",
+        "skill_type": "Soft"
+      }
+    },
+    {
+      "id": "Skill_Technical_Proposal",
+      "type": "Skill",
+      "properties": {
+        "name": "技术方案制定",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Documentation",
+      "type": "Skill",
+      "properties": {
+        "name": "文档设计及编写",
+        "skill_type": "Soft"
+      }
+    },
+    {
+      "id": "Skill_Office_Software_Advanced",
+      "type": "Skill",
+      "properties": {
+        "name": "WORD/EXCEL/PPT/VISIO/Project",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Software_Presales",
+      "type": "Skill",
+      "properties": {
+        "name": "软件行业售前工作经验",
+        "skill_type": "Soft"
+      }
+    },
+    {
+      "id": "Jobposting_Java_Developer_Miteng",
+      "type": "Jobposting",
+      "properties": {
+        "name": "Java开发工程师",
+        "experience_requirement": "2年经验"
+      }
+    },
+    {
+      "id": "Company_af0f59",
+      "type": "Company",
+      "properties": {
+        "name": "武汉米腾科技有限公司"
+      }
+    },
+    {
+      "id": "Skill_Mvc",
+      "type": "Skill",
+      "properties": {
+        "name": "MVC分层设计理念",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Springboot",
+      "type": "Skill",
+      "properties": {
+        "name": "SpingBoot",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Mybatis",
+      "type": "Skill",
+      "properties": {
+        "name": "Mybatis",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Hibernate",
+      "type": "Skill",
+      "properties": {
+        "name": "Hibernate",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Redis",
+      "type": "Skill",
+      "properties": {
+        "name": "Redis",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Database_Design",
+      "type": "Skill",
+      "properties": {
+        "name": "数据库设计",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Sql_Optimization",
+      "type": "Skill",
+      "properties": {
+        "name": "sql优化",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Svn_Git_Maven",
+      "type": "Skill",
+      "properties": {
+        "name": "SVN，GIT, Maven",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Data_Structures",
+      "type": "Skill",
+      "properties": {
+        "name": "数据结构",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Java_Stream",
+      "type": "Skill",
+      "properties": {
+        "name": "java stream api",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Requirement_Analysis",
+      "type": "Skill",
+      "properties": {
+        "name": "项目需求分析",
+        "skill_type": "Soft"
+      }
+    },
+    {
+      "id": "Jobposting_Cpp_Developer_Huaxin",
+      "type": "Jobposting",
+      "properties": {
+        "name": "C++开发工程师",
+        "experience_requirement": "1年经验"
+      }
+    },
+    {
+      "id": "Company_34d86c",
+      "type": "Company",
+      "properties": {
+        "name": "武汉华信云创技术服务有限公司"
+      }
+    },
+    {
+      "id": "Skill_Kernel_Development",
+      "type": "Skill",
+      "properties": {
+        "name": "内核开发",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Linux_Liteos",
+      "type": "Skill",
+      "properties": {
+        "name": "Linux/LiteOS",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Device_Driver",
+      "type": "Skill",
+      "properties": {
+        "name": "外设驱动开发",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Openharmony",
+      "type": "Skill",
+      "properties": {
+        "name": "OpenHarmony发行版底层软件",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Jobposting_Php_Developer_Anpei",
+      "type": "Jobposting",
+      "properties": {
+        "name": "高薪php，带薪年假，福利多多",
+        "experience_requirement": "1年经验"
+      }
+    },
+    {
+      "id": "Company_a5b0f7",
+      "type": "Company",
+      "properties": {
+        "name": "武汉安培教育科技有限公司"
+      }
+    },
+    {
+      "id": "Skill_Php",
+      "type": "Skill",
+      "properties": {
+        "name": "php",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Mysql",
+      "type": "Skill",
+      "properties": {
+        "name": "mysql",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Js_Jquery",
+      "type": "Skill",
+      "properties": {
+        "name": "js，jquery",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Thinkphp",
+      "type": "Skill",
+      "properties": {
+        "name": "thinkphp框架",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Sqlserver",
+      "type": "Skill",
+      "properties": {
+        "name": "SQL Server",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Skill_Server_Networking",
+      "type": "Skill",
+      "properties": {
+        "name": "服务器、路由器、交换机、无线网络设备部署维护",
+        "skill_type": "Technical"
+      }
+    },
+    {
+      "id": "Jobposting_Software_Intern_Kuyun",
+      "type": "Jobposting",
+      "properties": {
+        "name": "软件设计实习生+住宿（双休）.",
+        "experience_requirement": "无需经验"
+      }
+    },
+    {
+      "id": "Company_8c5466",
+      "type": "Company",
+      "properties": {
+        "name": "武汉酷韵软件开发有限公司"
+      }
+    },
+    {
+      "id": "Location_ad9efa",
+      "type": "Location",
+      "properties": {
+        "name": "武汉市",
+        "city": "武汉"
+      }
+    },
+    {
+      "id": "Location_00ed76",
+      "type": "Location",
+      "properties": {
+        "name": "湖北省",
+        "province": "湖北"
+      }
+    },
+    {
+      "id": "Location_4e1578",
+      "type": "Location",
+      "properties": {
+        "name": "洪山区",
+        "city": "洪山区"
+      }
+    },
+    {
+      "id": "Location_98b5cb",
+      "type": "Location",
+      "properties": {
+        "name": "武昌区",
+        "city": "武昌区"
+      }
+    },
+    {
+      "id": "Location_8d686d",
+      "type": "Location",
+      "properties": {
+        "name": "江汉区",
+        "city": "江汉区"
+      }
+    },
+    {
+      "id": "Location_e23836",
+      "type": "Location",
+      "properties": {
+        "name": "东湖新技术产业开发区",
+        "city": "东湖新技术产业开发区"
+      }
+    },
+    {
+      "id": "Location_21625f",
+      "type": "Location",
+      "properties": {
+        "name": "江夏区",
+        "city": "江夏区"
+      }
+    },
+    {
+      "id": "Year_2022",
+      "type": "Year",
+      "properties": {
+        "name": "2022"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "source": "Jobposting_C++_Wheyl",
+      "target": "Company_e4e8b2",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_C++_Wheyl",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_e4e8b2",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_C++_Wheyl",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_C++_Wheyl",
+      "target": "Skill_Linux_C_Cpp",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "精通"
+      }
+    },
+    {
+      "source": "Jobposting_C++_Wheyl",
+      "target": "Skill_Multithreading",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_C++_Wheyl",
+      "target": "Skill_Tcp_Udp",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_C++_Wheyl",
+      "target": "Skill_Rpc",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_C++_Wheyl",
+      "target": "Skill_Design_Patterns",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_C++_Wheyl",
+      "target": "Skill_Network_Architecture",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_C++_Wheyl",
+      "target": "Skill_High_Concurrency",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "具备"
+      }
+    },
+    {
+      "source": "Jobposting_C++_Wheyl",
+      "target": "Skill_Traffic_Control",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "具备"
+      }
+    },
+    {
+      "source": "Jobposting_C++_Wheyl",
+      "target": "Skill_Network_Optimization",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "具备"
+      }
+    },
+    {
+      "source": "Jobposting_C++_Wheyl",
+      "target": "Skill_Streaming_Protocol",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "精通"
+      }
+    },
+    {
+      "source": "Jobposting_C++_Wheyl",
+      "target": "Skill_Performance_Optimization",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_C++_Wheyl",
+      "target": "Skill_Distributed_Systems",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "有"
+      }
+    },
+    {
+      "source": "Jobposting_C++_Wheyl",
+      "target": "Skill_Business_Analysis",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "良好"
+      }
+    },
+    {
+      "source": "Jobposting_C++_Wheyl",
+      "target": "Skill_Communication",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "良好"
+      }
+    },
+    {
+      "source": "Jobposting_C++_Wheyl",
+      "target": "Skill_Learning_Ability",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "较强"
+      }
+    },
+    {
+      "source": "Jobposting_C++_Wheyl",
+      "target": "Skill_Network_Programming",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "精通"
+      }
+    },
+    {
+      "source": "Jobposting_Sales_Engineer_Ketian",
+      "target": "Company_ea6d4f",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Sales_Engineer_Ketian",
+      "target": "Location_4e1578",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_ea6d4f",
+      "target": "Location_4e1578",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Sales_Engineer_Ketian",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Sales_Engineer_Ketian",
+      "target": "Skill_Market_Development",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "有"
+      }
+    },
+    {
+      "source": "Jobposting_Sales_Engineer_Ketian",
+      "target": "Skill_Customer_Retention",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "有"
+      }
+    },
+    {
+      "source": "Jobposting_Sales_Engineer_Ketian",
+      "target": "Skill_Problem_Solving",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "具备"
+      }
+    },
+    {
+      "source": "Jobposting_Huawei_Distributor_Manager",
+      "target": "Company_a023ef",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Huawei_Distributor_Manager",
+      "target": "Location_98b5cb",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_a023ef",
+      "target": "Location_98b5cb",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Huawei_Distributor_Manager",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Huawei_Distributor_Manager",
+      "target": "Skill_Channel_Sales",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "负责"
+      }
+    },
+    {
+      "source": "Jobposting_Huawei_Distributor_Manager",
+      "target": "Skill_Sales_Strategy",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "能执行"
+      }
+    },
+    {
+      "source": "Jobposting_Huawei_Distributor_Manager",
+      "target": "Skill_Project_Tracking",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "负责"
+      }
+    },
+    {
+      "source": "Jobposting_Huawei_Distributor_Manager",
+      "target": "Skill_Business_Proposal",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "具备"
+      }
+    },
+    {
+      "source": "Jobposting_Huawei_Distributor_Manager",
+      "target": "Skill_It_Channel_Market",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_Huawei_Distributor_Manager",
+      "target": "Skill_Huawei_Devices",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_Huawei_Distributor_Manager",
+      "target": "Skill_H3C_Devices",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_Huawei_Distributor_Manager",
+      "target": "Skill_Sangfor_Devices",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_Huawei_Distributor_Manager",
+      "target": "Skill_Ruijie_Devices",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_Field_Ops_Engineer",
+      "target": "Company_50bc16",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Field_Ops_Engineer",
+      "target": "Location_98b5cb",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_50bc16",
+      "target": "Location_98b5cb",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Field_Ops_Engineer",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Field_Ops_Engineer",
+      "target": "Skill_Security_Response",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "时间响应"
+      }
+    },
+    {
+      "source": "Jobposting_Field_Ops_Engineer",
+      "target": "Skill_System_Upgrade",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "针对"
+      }
+    },
+    {
+      "source": "Jobposting_Field_Ops_Engineer",
+      "target": "Skill_Security_Policy",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "针对"
+      }
+    },
+    {
+      "source": "Jobposting_Field_Ops_Engineer",
+      "target": "Skill_Security_Monitoring",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "针对"
+      }
+    },
+    {
+      "source": "Jobposting_Field_Ops_Engineer",
+      "target": "Skill_Windows_Linux",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_Field_Ops_Engineer",
+      "target": "Skill_Desktop_Support",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "有"
+      }
+    },
+    {
+      "source": "Jobposting_Field_Ops_Engineer",
+      "target": "Skill_Office_Software",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_Field_Ops_Engineer",
+      "target": "Skill_Security_Awareness",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "具有较强"
+      }
+    },
+    {
+      "source": "Jobposting_Market_Expansion_Specialist",
+      "target": "Company_d9d3fe",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Market_Expansion_Specialist",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_d9d3fe",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Market_Expansion_Specialist",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Market_Expansion_Specialist",
+      "target": "Skill_Channel_Expansion",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "负责"
+      }
+    },
+    {
+      "source": "Jobposting_Market_Expansion_Specialist",
+      "target": "Skill_Retail_Operations",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "负责"
+      }
+    },
+    {
+      "source": "Jobposting_Market_Expansion_Specialist",
+      "target": "Skill_Market_Research",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "负责"
+      }
+    },
+    {
+      "source": "Jobposting_Market_Expansion_Specialist",
+      "target": "Skill_Store_Management",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "进行"
+      }
+    },
+    {
+      "source": "Jobposting_Market_Expansion_Specialist",
+      "target": "Skill_Fmcg_Experience",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "有"
+      }
+    },
+    {
+      "source": "Jobposting_Technical_Engineer_Xinchuan",
+      "target": "Company_0b3f7f",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Technical_Engineer_Xinchuan",
+      "target": "Location_8d686d",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_0b3f7f",
+      "target": "Location_8d686d",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Technical_Engineer_Xinchuan",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Technical_Engineer_Xinchuan",
+      "target": "Skill_Presales_Support",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "组织完成"
+      }
+    },
+    {
+      "source": "Jobposting_Technical_Engineer_Xinchuan",
+      "target": "Skill_Business_Opportunity",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "对...负主要责任"
+      }
+    },
+    {
+      "source": "Jobposting_Technical_Engineer_Xinchuan",
+      "target": "Skill_Technical_Proposal",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "制定"
+      }
+    },
+    {
+      "source": "Jobposting_Technical_Engineer_Xinchuan",
+      "target": "Skill_Documentation",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "擅长"
+      }
+    },
+    {
+      "source": "Jobposting_Technical_Engineer_Xinchuan",
+      "target": "Skill_Office_Software_Advanced",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练使用"
+      }
+    },
+    {
+      "source": "Jobposting_Technical_Engineer_Xinchuan",
+      "target": "Skill_Software_Presales",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "3年以上"
+      }
+    },
+    {
+      "source": "Jobposting_Java_Developer_Miteng",
+      "target": "Company_af0f59",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Java_Developer_Miteng",
+      "target": "Location_e23836",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_af0f59",
+      "target": "Location_e23836",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Java_Developer_Miteng",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Java_Developer_Miteng",
+      "target": "Skill_Mvc",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_Java_Developer_Miteng",
+      "target": "Skill_Springboot",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_Java_Developer_Miteng",
+      "target": "Skill_Mybatis",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_Java_Developer_Miteng",
+      "target": "Skill_Hibernate",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_Java_Developer_Miteng",
+      "target": "Skill_Redis",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_Java_Developer_Miteng",
+      "target": "Skill_Database_Design",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_Java_Developer_Miteng",
+      "target": "Skill_Sql_Optimization",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "精通"
+      }
+    },
+    {
+      "source": "Jobposting_Java_Developer_Miteng",
+      "target": "Skill_Svn_Git_Maven",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练使用"
+      }
+    },
+    {
+      "source": "Jobposting_Java_Developer_Miteng",
+      "target": "Skill_Data_Structures",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_Java_Developer_Miteng",
+      "target": "Skill_Java_Stream",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_Java_Developer_Miteng",
+      "target": "Skill_Requirement_Analysis",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "有"
+      }
+    },
+    {
+      "source": "Jobposting_Cpp_Developer_Huaxin",
+      "target": "Company_34d86c",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Cpp_Developer_Huaxin",
+      "target": "Location_21625f",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_34d86c",
+      "target": "Location_21625f",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Cpp_Developer_Huaxin",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Cpp_Developer_Huaxin",
+      "target": "Skill_Kernel_Development",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "负责"
+      }
+    },
+    {
+      "source": "Jobposting_Cpp_Developer_Huaxin",
+      "target": "Skill_Linux_Liteos",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练掌握"
+      }
+    },
+    {
+      "source": "Jobposting_Cpp_Developer_Huaxin",
+      "target": "Skill_Device_Driver",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "基于"
+      }
+    },
+    {
+      "source": "Jobposting_Cpp_Developer_Huaxin",
+      "target": "Skill_Openharmony",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "对...负责"
+      }
+    },
+    {
+      "source": "Jobposting_Php_Developer_Anpei",
+      "target": "Company_a5b0f7",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Php_Developer_Anpei",
+      "target": "Location_98b5cb",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_a5b0f7",
+      "target": "Location_98b5cb",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Php_Developer_Anpei",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Php_Developer_Anpei",
+      "target": "Skill_Php",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练使用"
+      }
+    },
+    {
+      "source": "Jobposting_Php_Developer_Anpei",
+      "target": "Skill_Mysql",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练使用"
+      }
+    },
+    {
+      "source": "Jobposting_Php_Developer_Anpei",
+      "target": "Skill_Js_Jquery",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练使用"
+      }
+    },
+    {
+      "source": "Jobposting_Php_Developer_Anpei",
+      "target": "Skill_Thinkphp",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "精通掌握"
+      }
+    },
+    {
+      "source": "Jobposting_Php_Developer_Anpei",
+      "target": "Skill_Sqlserver",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_Php_Developer_Anpei",
+      "target": "Skill_Server_Networking",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "精通"
+      }
+    },
+    {
+      "source": "Jobposting_Software_Intern_Kuyun",
+      "target": "Company_8c5466",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Software_Intern_Kuyun",
+      "target": "Location_4e1578",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_8c5466",
+      "target": "Location_4e1578",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_Software_Intern_Kuyun",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    }
+  ],
+  "metadata": {
+    "id": 16,
+    "job_title": "技术工程师",
+    "company_name": "湖北省信产通信服务有限公司数字科技分公司",
+    "salary_range": "0.8-1.2万/月",
+    "location": "武汉-江汉区",
+    "openings": 1,
+    "requirements": "[', '1、 组织完成所负责的产品线或行业所有售前资料及培训工作；', '2、 对负责的商机签约负主要责任；', '3、 合理统筹行业商机的跟进、突破与签约工作，以实现业绩目标；', '4、 负责商机整体推进计划、阶段目标计划、客户内部关键人的梳理与突破计划的制定和汇报，并确保计划达成；', '5、 开展客户需求收集、需求分析，制定项目的技术方案和准备标书等工作；', '6、 负责合理调配公司资源，保障公司利益不受损害；', '7、 完成上级领导及部门领导交办的其他任务。', '任职资格：', '1.\\xa0 具备优秀的组织协调、沟通理解及解决问题能力；', '2.\\xa0 具备出色的分析、归纳、总结、汇报的能力；', '3.\\xa0 擅长各类文档的设计及编写；', '4.\\xa0 对所负责的产品线或行业有深度的认识，并具备方案设计、产品演示、培训演讲及基本技术交流的能力', '5.\\xa0 熟练使用办公软件（WORD/EXCEL/PPT/VISIO/Project）', '6.\\xa0 3年以上软件行业售前工作经验', '7.\\xa0 本科及以上；专业要求：信息管理、信息工程、软件工程或计算机相关专业，条件优秀者可适当放宽要求', '具备前端技术背景者优先', '职能类别：', '售前/售后技术支持工程师]3-4年经验, 本科",
+    "search_keyword": "计算机软件",
+    "data_year": 2022,
+    "created_at": "2025-05-01 15:37:15"
+  },
+  "success": true,
+  "error_msg": ""
+}

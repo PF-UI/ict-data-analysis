@@ -1,0 +1,1211 @@
+{
+  "nodes": [
+    {
+      "id": "Jobposting_8F3A9D",
+      "type": "Jobposting",
+      "properties": {
+        "name": "Android安卓开发工程师",
+        "experience_requirement": "3-4年经验",
+        "salary": "未明确"
+      }
+    },
+    {
+      "id": "Company_a610aa",
+      "type": "Company",
+      "properties": {
+        "name": "纬创软件（武汉）有限公司"
+      }
+    },
+    {
+      "id": "Skill_1D9E8F",
+      "type": "Skill",
+      "properties": {
+        "name": "Android",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_2E0F1A",
+      "type": "Skill",
+      "properties": {
+        "name": "网络通讯",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_3F1G2B",
+      "type": "Skill",
+      "properties": {
+        "name": "API接口调试",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_4G2H3C",
+      "type": "Skill",
+      "properties": {
+        "name": "H5移动开发",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Jobposting_9G4B0E",
+      "type": "Jobposting",
+      "properties": {
+        "name": "硬件测试工程师",
+        "experience_requirement": "2年经验",
+        "salary": "未明确"
+      }
+    },
+    {
+      "id": "Company_8d04d8",
+      "type": "Company",
+      "properties": {
+        "name": "武汉虹信技术服务有限责任公司"
+      }
+    },
+    {
+      "id": "Skill_5H3I4D",
+      "type": "Skill",
+      "properties": {
+        "name": "硬件调试",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_6I4J5E",
+      "type": "Skill",
+      "properties": {
+        "name": "电路原理",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_7J5K6F",
+      "type": "Skill",
+      "properties": {
+        "name": "硬件可靠性测试",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Jobposting_0H5C1F",
+      "type": "Jobposting",
+      "properties": {
+        "name": "高级C++开发工程师(J13251)",
+        "experience_requirement": "3-4年经验",
+        "salary": "未明确"
+      }
+    },
+    {
+      "id": "Company_a5b447",
+      "type": "Company",
+      "properties": {
+        "name": "朗新科技集团股份有限公司"
+      }
+    },
+    {
+      "id": "Skill_8K6L7G",
+      "type": "Skill",
+      "properties": {
+        "name": "C++",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_9L7M8H",
+      "type": "Skill",
+      "properties": {
+        "name": "视频编解码",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_0M8N9I",
+      "type": "Skill",
+      "properties": {
+        "name": "ffmpeg",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_1N9O0J",
+      "type": "Skill",
+      "properties": {
+        "name": "webrtc",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_2O0P1K",
+      "type": "Skill",
+      "properties": {
+        "name": "RTP/RTCP",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_3P1Q2L",
+      "type": "Skill",
+      "properties": {
+        "name": "gb28181协议",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Jobposting_1I6D2G",
+      "type": "Jobposting",
+      "properties": {
+        "name": "Java工程师（武汉）10000-18000/月薪",
+        "experience_requirement": "3-4年经验",
+        "salary": "10000-18000/月薪"
+      }
+    },
+    {
+      "id": "Company_c7641c",
+      "type": "Company",
+      "properties": {
+        "name": "武汉天喻教育科技有限公司"
+      }
+    },
+    {
+      "id": "Skill_4Q2R3M",
+      "type": "Skill",
+      "properties": {
+        "name": "Java",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_5R3S4N",
+      "type": "Skill",
+      "properties": {
+        "name": "springboot",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_6S4T5O",
+      "type": "Skill",
+      "properties": {
+        "name": "springcloud",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_7T5U6P",
+      "type": "Skill",
+      "properties": {
+        "name": "mysql",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_8U6V7Q",
+      "type": "Skill",
+      "properties": {
+        "name": "mongo",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_9V7W8R",
+      "type": "Skill",
+      "properties": {
+        "name": "redis",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_0W8X9S",
+      "type": "Skill",
+      "properties": {
+        "name": "ES",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Jobposting_2J7E3H",
+      "type": "Jobposting",
+      "properties": {
+        "name": "产品研发负责人",
+        "experience_requirement": "8-9年经验",
+        "salary": "未明确"
+      }
+    },
+    {
+      "id": "Company_63cd42",
+      "type": "Company",
+      "properties": {
+        "name": "中国联合网络通信有限公司湖北省分公司"
+      }
+    },
+    {
+      "id": "Skill_1X9Y0T",
+      "type": "Skill",
+      "properties": {
+        "name": "大数据",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_2Y0Z1U",
+      "type": "Skill",
+      "properties": {
+        "name": "人工智能",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Jobposting_3K8F4I",
+      "type": "Jobposting",
+      "properties": {
+        "name": "小程序开发实习生",
+        "experience_requirement": "无需经验",
+        "salary": "未明确"
+      }
+    },
+    {
+      "id": "Company_f79ac7",
+      "type": "Company",
+      "properties": {
+        "name": "武汉瑞鑫智联科技有限公司"
+      }
+    },
+    {
+      "id": "Skill_3Z1A2V",
+      "type": "Skill",
+      "properties": {
+        "name": "Java",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_4A2B3W",
+      "type": "Skill",
+      "properties": {
+        "name": "MySQL数据库",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_5B3C4X",
+      "type": "Skill",
+      "properties": {
+        "name": "JSP",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_6C4D5Y",
+      "type": "Skill",
+      "properties": {
+        "name": "Web前端",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Jobposting_4L9G5J",
+      "type": "Jobposting",
+      "properties": {
+        "name": "超迅服务器渠道销售",
+        "experience_requirement": "1年经验",
+        "salary": "5000以上底薪 + 超出毛利润部分25%提成 + 通讯车补 + 表现优异奖金"
+      }
+    },
+    {
+      "id": "Company_bdb12b",
+      "type": "Company",
+      "properties": {
+        "name": "武汉超迅科技有限公司"
+      }
+    },
+    {
+      "id": "Skill_7D5E6Z",
+      "type": "Skill",
+      "properties": {
+        "name": "计算机硬件产品",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Jobposting_5M0H6K",
+      "type": "Jobposting",
+      "properties": {
+        "name": "Software Development Engineer",
+        "experience_requirement": "5-7年经验",
+        "salary": "未明确"
+      }
+    },
+    {
+      "id": "Company_6400e2",
+      "type": "Company",
+      "properties": {
+        "name": "深圳市汇顶科技股份有限公司"
+      }
+    },
+    {
+      "id": "Skill_8E6F7A",
+      "type": "Skill",
+      "properties": {
+        "name": "Java",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_9F7G8B",
+      "type": "Skill",
+      "properties": {
+        "name": "J2EE",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_0G8H9C",
+      "type": "Skill",
+      "properties": {
+        "name": "Spring",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_1H9I0D",
+      "type": "Skill",
+      "properties": {
+        "name": "Vert.x",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_2I0J1E",
+      "type": "Skill",
+      "properties": {
+        "name": "阿里云",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_3J1K2F",
+      "type": "Skill",
+      "properties": {
+        "name": "AWS云服务",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_4K2L3G",
+      "type": "Skill",
+      "properties": {
+        "name": "Git",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_5L3M4H",
+      "type": "Skill",
+      "properties": {
+        "name": "CI/CD",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_6M4N5I",
+      "type": "Skill",
+      "properties": {
+        "name": "Docker",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_7N5O6J",
+      "type": "Skill",
+      "properties": {
+        "name": "Elasticsearch",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_8O6P7K",
+      "type": "Skill",
+      "properties": {
+        "name": "PostgreSQL",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_9P7Q8L",
+      "type": "Skill",
+      "properties": {
+        "name": "MySQL",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Jobposting_6N1I7L",
+      "type": "Jobposting",
+      "properties": {
+        "name": "销售代表（无责底薪4K+高提成）",
+        "experience_requirement": "1年经验",
+        "salary": "底薪+提成"
+      }
+    },
+    {
+      "id": "Company_a5707a",
+      "type": "Company",
+      "properties": {
+        "name": "武汉华大中正科技有限责任公司"
+      }
+    },
+    {
+      "id": "Skill_0Q8R9M",
+      "type": "Skill",
+      "properties": {
+        "name": "计算机网络设备销售",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Jobposting_7O2J8M",
+      "type": "Jobposting",
+      "properties": {
+        "name": "C++开发工程师",
+        "experience_requirement": "3-4年经验",
+        "salary": "未明确"
+      }
+    },
+    {
+      "id": "Company_f4410f",
+      "type": "Company",
+      "properties": {
+        "name": "武汉风河信息科技有限公司"
+      }
+    },
+    {
+      "id": "Skill_1R9S0N",
+      "type": "Skill",
+      "properties": {
+        "name": "C/C++",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_2S0T1O",
+      "type": "Skill",
+      "properties": {
+        "name": "Visual Studio",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_3T1U2P",
+      "type": "Skill",
+      "properties": {
+        "name": "VC",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_4U2V3Q",
+      "type": "Skill",
+      "properties": {
+        "name": "WIN32",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_5V3W4R",
+      "type": "Skill",
+      "properties": {
+        "name": "MFC",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_6W4X5S",
+      "type": "Skill",
+      "properties": {
+        "name": "python",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Skill_7X5Y6T",
+      "type": "Skill",
+      "properties": {
+        "name": "opencv",
+        "skill_type": "技术技能"
+      }
+    },
+    {
+      "id": "Location_ad9efa",
+      "type": "Location",
+      "properties": {
+        "name": "武汉市",
+        "city": "武汉"
+      }
+    },
+    {
+      "id": "Location_00ed76",
+      "type": "Location",
+      "properties": {
+        "name": "湖北省",
+        "province": "湖北"
+      }
+    },
+    {
+      "id": "Location_14bf5c",
+      "type": "Location",
+      "properties": {
+        "name": "成都市",
+        "city": "成都"
+      }
+    },
+    {
+      "id": "Location_92ffc5",
+      "type": "Location",
+      "properties": {
+        "name": "四川省",
+        "province": "四川"
+      }
+    },
+    {
+      "id": "Year_2022",
+      "type": "Year",
+      "properties": {
+        "name": "2022"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "source": "Jobposting_8F3A9D",
+      "target": "Company_a610aa",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_8F3A9D",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_a610aa",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_8F3A9D",
+      "target": "Skill_1D9E8F",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_8F3A9D",
+      "target": "Skill_2E0F1A",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "了解"
+      }
+    },
+    {
+      "source": "Jobposting_8F3A9D",
+      "target": "Skill_3F1G2B",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_8F3A9D",
+      "target": "Skill_4G2H3C",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "具备"
+      }
+    },
+    {
+      "source": "Jobposting_8F3A9D",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_9G4B0E",
+      "target": "Company_8d04d8",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_9G4B0E",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_8d04d8",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_9G4B0E",
+      "target": "Skill_5H3I4D",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_9G4B0E",
+      "target": "Skill_6I4J5E",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_9G4B0E",
+      "target": "Skill_7J5K6F",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "有经验"
+      }
+    },
+    {
+      "source": "Jobposting_9G4B0E",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_0H5C1F",
+      "target": "Company_a5b447",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_0H5C1F",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_a5b447",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_0H5C1F",
+      "target": "Skill_8K6L7G",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_0H5C1F",
+      "target": "Skill_9L7M8H",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "有经验"
+      }
+    },
+    {
+      "source": "Jobposting_0H5C1F",
+      "target": "Skill_0M8N9I",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "有经验"
+      }
+    },
+    {
+      "source": "Jobposting_0H5C1F",
+      "target": "Skill_1N9O0J",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "有经验"
+      }
+    },
+    {
+      "source": "Jobposting_0H5C1F",
+      "target": "Skill_2O0P1K",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_0H5C1F",
+      "target": "Skill_3P1Q2L",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_0H5C1F",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_1I6D2G",
+      "target": "Company_c7641c",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_1I6D2G",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_c7641c",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_1I6D2G",
+      "target": "Skill_4Q2R3M",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_1I6D2G",
+      "target": "Skill_5R3S4N",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_1I6D2G",
+      "target": "Skill_6S4T5O",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_1I6D2G",
+      "target": "Skill_7T5U6P",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_1I6D2G",
+      "target": "Skill_8U6V7Q",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_1I6D2G",
+      "target": "Skill_9V7W8R",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_1I6D2G",
+      "target": "Skill_0W8X9S",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_1I6D2G",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_2J7E3H",
+      "target": "Company_63cd42",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_2J7E3H",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_63cd42",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_2J7E3H",
+      "target": "Skill_1X9Y0T",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "精通"
+      }
+    },
+    {
+      "source": "Jobposting_2J7E3H",
+      "target": "Skill_2Y0Z1U",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "精通"
+      }
+    },
+    {
+      "source": "Jobposting_2J7E3H",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_3K8F4I",
+      "target": "Company_f79ac7",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_3K8F4I",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_f79ac7",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_3K8F4I",
+      "target": "Skill_3Z1A2V",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "要求"
+      }
+    },
+    {
+      "source": "Jobposting_3K8F4I",
+      "target": "Skill_4A2B3W",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "要求"
+      }
+    },
+    {
+      "source": "Jobposting_3K8F4I",
+      "target": "Skill_5B3C4X",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "要求"
+      }
+    },
+    {
+      "source": "Jobposting_3K8F4I",
+      "target": "Skill_6C4D5Y",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "要求"
+      }
+    },
+    {
+      "source": "Jobposting_3K8F4I",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_4L9G5J",
+      "target": "Company_bdb12b",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_4L9G5J",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_bdb12b",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_4L9G5J",
+      "target": "Skill_7D5E6Z",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "了解"
+      }
+    },
+    {
+      "source": "Jobposting_4L9G5J",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_5M0H6K",
+      "target": "Company_6400e2",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_5M0H6K",
+      "target": "Location_14bf5c",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_6400e2",
+      "target": "Location_14bf5c",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_5M0H6K",
+      "target": "Skill_8E6F7A",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_5M0H6K",
+      "target": "Skill_9F7G8B",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_5M0H6K",
+      "target": "Skill_0G8H9C",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_5M0H6K",
+      "target": "Skill_1H9I0D",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_5M0H6K",
+      "target": "Skill_2I0J1E",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_5M0H6K",
+      "target": "Skill_3J1K2F",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_5M0H6K",
+      "target": "Skill_4K2L3G",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_5M0H6K",
+      "target": "Skill_5L3M4H",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_5M0H6K",
+      "target": "Skill_6M4N5I",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_5M0H6K",
+      "target": "Skill_7N5O6J",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_5M0H6K",
+      "target": "Skill_8O6P7K",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_5M0H6K",
+      "target": "Skill_9P7Q8L",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_5M0H6K",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_6N1I7L",
+      "target": "Company_a5707a",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_6N1I7L",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_a5707a",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_6N1I7L",
+      "target": "Skill_0Q8R9M",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "有经验"
+      }
+    },
+    {
+      "source": "Jobposting_6N1I7L",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_7O2J8M",
+      "target": "Company_f4410f",
+      "type": "OFFERED_BY",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_7O2J8M",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Company_f4410f",
+      "target": "Location_ad9efa",
+      "type": "LOCATED_IN",
+      "properties": {}
+    },
+    {
+      "source": "Jobposting_7O2J8M",
+      "target": "Skill_1R9S0N",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_7O2J8M",
+      "target": "Skill_2S0T1O",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟练"
+      }
+    },
+    {
+      "source": "Jobposting_7O2J8M",
+      "target": "Skill_3T1U2P",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "三年以上"
+      }
+    },
+    {
+      "source": "Jobposting_7O2J8M",
+      "target": "Skill_4U2V3Q",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "三年以上"
+      }
+    },
+    {
+      "source": "Jobposting_7O2J8M",
+      "target": "Skill_5V3W4R",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "三年以上"
+      }
+    },
+    {
+      "source": "Jobposting_7O2J8M",
+      "target": "Skill_6W4X5S",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "熟悉"
+      }
+    },
+    {
+      "source": "Jobposting_7O2J8M",
+      "target": "Skill_7X5Y6T",
+      "type": "REQUIRES_SKILL",
+      "properties": {
+        "proficiency_level": "使用过"
+      }
+    },
+    {
+      "source": "Jobposting_7O2J8M",
+      "target": "Year_2022",
+      "type": "YEAR",
+      "properties": {}
+    }
+  ],
+  "metadata": {
+    "id": 8,
+    "job_title": "Software Development Engineer",
+    "company_name": "深圳市汇顶科技股份有限公司",
+    "salary_range": "1.8-3万/月",
+    "location": "成都",
+    "openings": 1,
+    "requirements": "[', '工作职责:', '1. 负责私有云平台的架构设计与优化，私有云与混合云产品的总体架构与产品设计；', '2. 负责持续优化、改进系统的设计和编码实现，提升系统的整体性能与稳定性；', '3. 负责平台建设，保证平台可维护，可审计，保障平台安全运行。', '任职资格:', '1. 计算机软件或相关专业，本科或以上学历；', '2. 5年以上Java J2EE项目开发经验；', '3. 有大规模运维系统设计经验，有微服务设计的经验，有高并发和高性能服务设计和开发的经验；', '4. 熟练掌握Spring或Vert.x生态系统，熟悉阿里云或AWS云服务；', '5. 熟练使用Idea/maven/svn(git)等软件开发工具；', '6. 熟练掌握 Java/python/C++ 语言；', '7. 熟练掌握Git工作流；熟悉CI/CD者优先；', '8. 熟悉Docker，Elasticsearch，PostgreSQL/MySQL者优先；', '9. 英语四级以上，具备良好的英文阅读、书写、口语能力；', '10. 沟通表达能力和执行能力强，能够协同多个团队共同完成目标；', '职能类别：', 'Java开发工程师', '关键字：', 'Java', 'J2EE', '软件开发]5-7年经验, 本科",
+    "search_keyword": "电子技术/半导体/集成电路",
+    "data_year": 2022,
+    "created_at": "2025-05-01 15:37:15"
+  },
+  "success": true,
+  "error_msg": ""
+}
