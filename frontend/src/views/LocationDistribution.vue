@@ -3,7 +3,7 @@
     <el-card>
       <template #header>
         <div class="card-header">
-          <h3>2022-2025年招聘数据地理分布</h3>
+          <h3>2022-2026年招聘数据地理分布</h3>
         </div>
       </template>
 
@@ -49,7 +49,7 @@ import * as echarts from 'echarts'
 import { jobListingService, type LocationStatistics } from '@/services/jobListing'
 import { ElMessage } from 'element-plus'
 
-const years = ref<number[]>([2022, 2023, 2024, 2025])
+const years = ref<number[]>([2022, 2023, 2024, 2025, 2026])
 const loadingMaps = ref<Record<number, boolean>>({})
 const statisticsData = ref<LocationStatistics | null>(null)
 const chartInstances = ref<Record<number, echarts.ECharts | null>>({})
@@ -142,7 +142,7 @@ const loadLocationStatistics = async () => {
     // 并行加载地图数据和统计数据，不等待地图数据
     const [mapData, statistics] = await Promise.all([
       loadChinaMap().catch(() => null), // 允许地图加载失败，使用备用方案
-      jobListingService.getLocationStatistics(2022, 2025)
+      jobListingService.getLocationStatistics(2022, 2026)
     ])
     
     statisticsData.value = statistics

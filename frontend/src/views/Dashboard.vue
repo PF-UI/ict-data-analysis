@@ -124,7 +124,7 @@
         <el-card class="dashboard-card">
           <template #header>
             <div class="card-header">
-              <h3>2022-2025年薪资分布</h3>
+              <h3>2022-2026年薪资分布</h3>
             </div>
           </template>
 
@@ -190,7 +190,7 @@ const queryParams = reactive<JobListingQuery>({
 
 // 薪资分布图相关
 const activeYear = ref('2022')
-const years = ref<number[]>([2022, 2023, 2024, 2025])
+const years = ref<number[]>([2022, 2023, 2024, 2025, 2026])
 const loadingCharts = ref<Record<number, boolean>>({})
 const statisticsData = ref<SalaryStatistics | null>(null)
 const chartInstances = ref<Record<number, echarts.ECharts | null>>({})
@@ -235,7 +235,7 @@ const loadJobListings = async () => {
 // 加载薪资统计数据
 const loadSalaryStatistics = async () => {
   try {
-    const data: SalaryStatistics = await jobListingService.getSalaryStatistics(2022, 2025)
+    const data: SalaryStatistics = await jobListingService.getSalaryStatistics(2022, 2026)
     statisticsData.value = data
     
     // 更新年份列表（基于实际数据）

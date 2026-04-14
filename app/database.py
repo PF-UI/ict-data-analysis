@@ -53,33 +53,36 @@ def get_db():
 
 
 def init_db():
-    """初始化数据库，创建所有表"""
+    """初始化数据库：MySQL 业务表 + PostgreSQL 对话历史表（chat_sessions / chat_messages）。"""
+    import app.models.city_mapping  # noqa: F401
+    import app.models.job_listing  # noqa: F401
+    import app.models.user  # noqa: F401
+
     try:
         # 测试连接
         with engine.connect() as conn:
             conn.execute(text("SELECT 1"))
         # 创建所有表
         Base.metadata.create_all(bind=engine)
-        print("✅ 数据库表初始化成功")
+        print("MySQL 业务表初始化成功")
     except OperationalError as e:
         error_msg = str(e)
         if "1045" in error_msg or "Access denied" in error_msg:
-            raise OperationalError(
-                "数据库连接失败：用户名或密码错误。请检查 .env 文件中的 DATABASE_URL 配置。",
-                None,
-                None
-            ) from e
+            print(
+                "数据库连接失败：用户名或密码错误。请检查 .env 文件中的 DATABASE_URL 配置。"
+            )
         elif "1049" in error_msg or "Unknown database" in error_msg:
-            raise OperationalError(
-                "数据库不存在。请先创建数据库。",
-                None,
-                None
-            ) from e
+            print("数据库不存在。请先创建数据库。")
         elif "2003" in error_msg or "Can't connect" in error_msg:
-            raise OperationalError(
-                "无法连接到 MySQL 服务器。请检查 MySQL 服务是否运行。",
-                None,
-                None
-            ) from e
+            print("无法连接到 MySQL 服务器。请检查 MySQL 服务是否运行。")
         else:
-            raise
+            print(f"数据库初始化失败: {e}")
+        print("应用将继续运行，但 MySQL 业务功能可能不可用")
+        print("请检查 .env 文件中的 DATABASE_URL 配置")
+        print("可以运行 'python test.py' 测试数据库连接")
+    finally:
+        # 与 MySQL 是否成功解耦；记忆库不可用时由 init_history_db 抛错并阻止启动
+        from app.history_database import init_history_db
+
+        init_history_db()
+        print("PostgreSQL 对话历史表初始化成功")

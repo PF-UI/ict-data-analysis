@@ -1,73 +1,92 @@
 <template>
-  <div class="qa-page">
-    <el-card class="qa-card">
-      <template #header>
-        <div class="card-header">
-          <h2>智能问答系统</h2>
+  <div class="smart-doc-page">
+    <aside class="session-sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-title">历史会话</span>
+        <el-button type="primary" link @click="startNewSession">新对话</el-button>
+      </div>
+      <el-scrollbar class="session-scroll">
+        <div
+          v-for="s in sessions"
+          :key="s.session_id"
+          :class="['session-item', { active: s.session_id === currentSessionId }]"
+          @click="selectSession(s.session_id)"
+        >
+          <div class="session-title">{{ s.title }}</div>
+          <div class="session-time">{{ formatSessionTime(s.updated_at) }}</div>
         </div>
-      </template>
-      
-      <div class="chat-container">
-        <div class="messages" ref="messagesRef">
-          <div 
-            v-for="(message, index) in messages" 
-            :key="index"
-            :class="['message', message.type]"
-          >
-            <div class="message-avatar">
-              <el-icon v-if="message.type === 'user'"><User /></el-icon>
-              <el-icon v-else><ChatDotRound /></el-icon>
-            </div>
-            <div class="message-content">
-              <div class="message-text">{{ message.content }}</div>
-              <div class="message-time">{{ message.time }}</div>
-            </div>
-          </div>
-          <div v-if="streamingMessage" class="message assistant">
-            <div class="message-avatar">
-              <el-icon><ChatDotRound /></el-icon>
-            </div>
-            <div class="message-content">
-              <div class="message-text">
-                {{ streamingMessage }}
-                <span class="cursor">▋</span>
+        <el-empty
+          v-if="!sessions.length && !sessionsLoading"
+          description="暂无会话，开始新对话吧"
+          :image-size="72"
+        />
+      </el-scrollbar>
+    </aside>
+
+    <div class="main-panel">
+      <el-card class="qa-card" shadow="never">
+        <div class="chat-container">
+          <div class="messages" ref="messagesRef">
+            <div
+              v-for="(message, index) in messages"
+              :key="index"
+              :class="['message', message.type]"
+            >
+              <div class="message-avatar">
+                <el-icon v-if="message.type === 'user'"><User /></el-icon>
+                <el-icon v-else><ChatDotRound /></el-icon>
+              </div>
+              <div class="message-content">
+                <div class="message-text">
+                  {{ message.content }}
+                  <span
+                    v-if="loading && message.type === 'assistant' && index === currentAnswerIndex"
+                    class="cursor"
+                  >▋</span>
+                </div>
+                <div class="message-time">{{ message.time }}</div>
               </div>
             </div>
           </div>
-        </div>
-        
-        <div class="input-area">
-          <el-input
-            v-model="currentQuestion"
-            type="textarea"
-            :rows="3"
-            placeholder="请输入您的问题..."
-            @keydown.ctrl.enter="handleSubmit"
-            @keydown.meta.enter="handleSubmit"
-            :disabled="loading"
-          />
-          <div class="input-actions">
-            <el-button 
-              type="primary" 
-              @click="handleSubmit"
-              :loading="loading"
-              :disabled="!currentQuestion.trim()"
-            >
-              发送
-            </el-button>
-            <el-button @click="handleClear">清空</el-button>
+
+          <div class="input-area">
+            <el-input
+              v-model="currentQuestion"
+              type="textarea"
+              :rows="3"
+              placeholder="请输入您的问题..."
+              @keydown.ctrl.enter="handleSubmit"
+              @keydown.meta.enter="handleSubmit"
+              :disabled="loading"
+            />
+            <div class="input-actions">
+              <el-button
+                type="primary"
+                @click="handleSubmit"
+                :loading="loading"
+                :disabled="!currentQuestion.trim()"
+              >
+                发送
+              </el-button>
+              <el-button @click="handleClear">清空</el-button>
+            </div>
           </div>
         </div>
-      </div>
-    </el-card>
+      </el-card>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, nextTick, onBeforeUnmount } from 'vue'
+import { ref, nextTick, onBeforeUnmount, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
-import { User, ChatDotRound, Loading } from '@element-plus/icons-vue'
-import { qaService } from '@/services/qa'
+import { User, ChatDotRound } from '@element-plus/icons-vue'
+import { qaService, type ChatMessageItem, type ChatSessionItem } from '@/services/qa'
+
+const SESSION_STORAGE_KEY = 'smart_doc_session_id'
+const PAGE_TITLE = '智能问答 · ICT数据分析系统'
+const savedDocumentTitle =
+  typeof document !== 'undefined' ? document.title : ''
 
 interface Message {
   type: 'user' | 'assistant'
@@ -75,19 +94,35 @@ interface Message {
   time: string
 }
 
+const sessions = ref<ChatSessionItem[]>([])
+const sessionsLoading = ref(false)
+const currentSessionId = ref('')
 const messages = ref<Message[]>([])
 const currentQuestion = ref('')
 const loading = ref(false)
-const streamingMessage = ref('')
 const currentAnswerIndex = ref(-1)
 const closeWS = ref<(() => void) | null>(null)
 const messagesRef = ref<HTMLElement>()
 
 const formatTime = (date: Date = new Date()) => {
-  return date.toLocaleTimeString('zh-CN', { 
-    hour: '2-digit', 
-    minute: '2-digit' 
+  return date.toLocaleTimeString('zh-CN', {
+    hour: '2-digit',
+    minute: '2-digit'
   })
+}
+
+const formatSessionTime = (iso: string) => {
+  try {
+    const d = new Date(iso)
+    return d.toLocaleString('zh-CN', {
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit'
+    })
+  } catch {
+    return ''
+  }
 }
 
 const scrollToBottom = async () => {
@@ -97,33 +132,114 @@ const scrollToBottom = async () => {
   }
 }
 
+async function loadSessions() {
+  sessionsLoading.value = true
+  try {
+    sessions.value = await qaService.listSessions(0, 80)
+  } catch {
+    sessions.value = []
+  } finally {
+    sessionsLoading.value = false
+  }
+}
+
+function mapApiMessage(m: ChatMessageItem): Message {
+  const t = m.created_at
+    ? new Date(m.created_at).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
+    : ''
+  const type = m.role === 'user' ? 'user' : 'assistant'
+  return { type, content: m.content || '', time: t }
+}
+
+async function loadMessagesForSession(sessionId: string) {
+  try {
+    const rows = await qaService.listMessages(sessionId)
+    messages.value = rows.map(mapApiMessage)
+    await scrollToBottom()
+  } catch {
+    messages.value = []
+    ElMessage.warning('该会话不存在或已失效，已开启新会话')
+    startNewSession()
+  }
+}
+
+function persistSessionId(id: string) {
+  currentSessionId.value = id
+  localStorage.setItem(SESSION_STORAGE_KEY, id)
+}
+
+async function selectSession(sessionId: string) {
+  if (closeWS.value) {
+    closeWS.value()
+    closeWS.value = null
+  }
+  loading.value = false
+  currentAnswerIndex.value = -1
+  persistSessionId(sessionId)
+  await loadMessagesForSession(sessionId)
+}
+
+function startNewSession() {
+  if (closeWS.value) {
+    closeWS.value()
+    closeWS.value = null
+  }
+  loading.value = false
+  currentAnswerIndex.value = -1
+  const id = crypto.randomUUID()
+  persistSessionId(id)
+  messages.value = []
+  currentQuestion.value = ''
+}
+
+async function initFromStorage() {
+  await loadSessions()
+  let id = localStorage.getItem(SESSION_STORAGE_KEY)?.trim()
+  if (!id) {
+    id = crypto.randomUUID()
+    localStorage.setItem(SESSION_STORAGE_KEY, id)
+  }
+  currentSessionId.value = id
+  const exists = sessions.value.some((s) => s.session_id === id)
+  if (exists) {
+    await loadMessagesForSession(id)
+  } else {
+    messages.value = []
+  }
+}
+
+onMounted(() => {
+  document.title = PAGE_TITLE
+  void initFromStorage()
+})
+
 const handleSubmit = async () => {
   const question = currentQuestion.value.trim()
   if (!question || loading.value) {
     return
   }
 
-  // 如果已有连接，先关闭
   if (closeWS.value) {
     closeWS.value()
     closeWS.value = null
   }
 
-  // 添加用户消息
+  const sid = currentSessionId.value || crypto.randomUUID()
+  if (!currentSessionId.value) {
+    persistSessionId(sid)
+  }
+
   messages.value.push({
     type: 'user',
     content: question,
     time: formatTime()
   })
 
-  // 清空输入框
   currentQuestion.value = ''
   loading.value = true
-  streamingMessage.value = ''
   currentAnswerIndex.value = -1
   await scrollToBottom()
 
-  // 添加一个占位的助手消息，用于流式更新
   currentAnswerIndex.value = messages.value.length
   messages.value.push({
     type: 'assistant',
@@ -131,70 +247,66 @@ const handleSubmit = async () => {
     time: formatTime()
   })
 
-  // 使用 WebSocket 流式获取回答
   closeWS.value = qaService.askQuestionStream(
     question,
+    sid,
     (message) => {
       if (message.type === 'start') {
-        // 开始接收
-        streamingMessage.value = ''
+        if (message.session_id) {
+          persistSessionId(message.session_id)
+        }
         if (currentAnswerIndex.value >= 0 && currentAnswerIndex.value < messages.value.length) {
           messages.value[currentAnswerIndex.value].content = ''
         }
       } else if (message.type === 'chunk') {
-        // 接收数据块
         if (message.content) {
-          streamingMessage.value += message.content
-          if (currentAnswerIndex.value >= 0 && currentAnswerIndex.value < messages.value.length) {
-            messages.value[currentAnswerIndex.value].content = streamingMessage.value
+          const idx = currentAnswerIndex.value
+          if (idx >= 0 && idx < messages.value.length) {
+            messages.value[idx].content += message.content
           }
-          scrollToBottom()
+          void scrollToBottom()
         }
       } else if (message.type === 'done') {
-        // 完成
         loading.value = false
-        streamingMessage.value = ''
+        if (message.session_id) {
+          persistSessionId(message.session_id)
+        }
         if (message.answer && currentAnswerIndex.value >= 0 && currentAnswerIndex.value < messages.value.length) {
           messages.value[currentAnswerIndex.value].content = message.answer
         }
         currentAnswerIndex.value = -1
         closeWS.value = null
-        scrollToBottom()
+        void scrollToBottom()
+        void loadSessions()
       } else if (message.type === 'error') {
-        // 错误
         loading.value = false
-        streamingMessage.value = ''
         ElMessage.error(message.error || '提问失败，请稍后重试')
         if (currentAnswerIndex.value >= 0 && currentAnswerIndex.value < messages.value.length) {
           messages.value[currentAnswerIndex.value].content = '抱歉，我遇到了一些问题，请稍后再试。'
         }
         currentAnswerIndex.value = -1
         closeWS.value = null
-        scrollToBottom()
+        void scrollToBottom()
       }
     },
-    (error) => {
+    () => {
       loading.value = false
-      streamingMessage.value = ''
       ElMessage.error('连接错误，请稍后重试')
       if (currentAnswerIndex.value >= 0 && currentAnswerIndex.value < messages.value.length) {
         messages.value[currentAnswerIndex.value].content = '连接错误，请稍后再试。'
       }
       currentAnswerIndex.value = -1
       closeWS.value = null
-      scrollToBottom()
+      void scrollToBottom()
     },
     () => {
-      // 连接关闭
       loading.value = false
-      streamingMessage.value = ''
       closeWS.value = null
     }
   )
 }
 
 const handleClear = () => {
-  // 关闭 WebSocket 连接
   if (closeWS.value) {
     closeWS.value()
     closeWS.value = null
@@ -202,12 +314,11 @@ const handleClear = () => {
   messages.value = []
   currentQuestion.value = ''
   loading.value = false
-  streamingMessage.value = ''
   currentAnswerIndex.value = -1
 }
 
-// 组件卸载时关闭连接
 onBeforeUnmount(() => {
+  document.title = savedDocumentTitle
   if (closeWS.value) {
     closeWS.value()
   }
@@ -215,10 +326,83 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-.qa-page {
-  max-width: 1200px;
+.smart-doc-page {
+  display: flex;
+  max-width: 1400px;
   margin: 0 auto;
   height: calc(100vh - 100px);
+  gap: 0;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.session-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  border-right: 1px solid #ebeef5;
+  display: flex;
+  flex-direction: column;
+  background: #fafafa;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-bottom: 1px solid #ebeef5;
+}
+
+.sidebar-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #303133;
+}
+
+.session-scroll {
+  flex: 1;
+  min-height: 0;
+}
+
+.session-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.15s;
+}
+
+.session-item:hover {
+  background: #f0f2f5;
+}
+
+.session-item.active {
+  background: #ecf5ff;
+  border-left: 3px solid #409eff;
+  padding-left: 11px;
+}
+
+.session-title {
+  font-size: 13px;
+  color: #303133;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.session-time {
+  font-size: 12px;
+  color: #909399;
+  margin-top: 4px;
+}
+
+.main-panel {
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
 }
@@ -228,19 +412,14 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
   height: 100%;
-}
-
-.card-header h2 {
-  margin: 0;
-  color: #303133;
-  font-size: 20px;
+  border: none;
 }
 
 .chat-container {
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-height: 500px;
+  min-height: 480px;
 }
 
 .messages {
@@ -345,10 +524,12 @@ onBeforeUnmount(() => {
 }
 
 @keyframes blink {
-  0%, 50% {
+  0%,
+  50% {
     opacity: 1;
   }
-  51%, 100% {
+  51%,
+  100% {
     opacity: 0;
   }
 }
@@ -363,18 +544,5 @@ onBeforeUnmount(() => {
   display: flex;
   justify-content: flex-end;
   gap: 12px;
-}
-
-.is-loading {
-  animation: rotating 2s linear infinite;
-}
-
-@keyframes rotating {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 </style>

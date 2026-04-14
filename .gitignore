@@ -15,5 +15,14 @@ wheels/
 *.sqlite3
 
 # Environment variables
-.env
-.env.local
+
+# log files
+*.log
+
+# Kg LLM 缓存（按内容哈希命名的 json）
+Kg/job_kg_cache/
+
+.xlsx
+.cursor
+
+deploy/

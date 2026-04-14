@@ -57,11 +57,14 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  const logout = () => {
+  /** @param silent 为 true 时不弹「已退出登录」（例如由全局 401 拦截器清理会话时） */
+  const logout = (silent = false) => {
     token.value = null
     user.value = null
     localStorage.removeItem('token')
-    ElMessage.success('已退出登录')
+    if (!silent) {
+      ElMessage.success('已退出登录')
+    }
   }
 
   const loadUser = async () => {
@@ -71,7 +74,8 @@ export const useAuthStore = defineStore('auth', () => {
       user.value = await authService.getCurrentUser()
     } catch (error) {
       console.error('加载用户信息失败', error)
-      logout()
+      // 401 时全局拦截器已提示并清理会话，避免再弹「已退出登录」
+      logout(true)
     }
   }
 

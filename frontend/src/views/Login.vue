@@ -110,11 +110,41 @@ const handleLogin = async () => {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-color: #4a5568;
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.28),
+      rgba(0, 0, 0, 0.28)
+    ),
+    url('/login-campus.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .login-card {
   width: 400px;
+  --el-card-bg-color: transparent;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(24px) saturate(1.08);
+  -webkit-backdrop-filter: blur(24px) saturate(1.08);
+}
+
+.login-card :deep(.el-card__header) {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.login-card :deep(.el-card__body) {
+  background: transparent !important;
+}
+
+.login-card :deep(.el-form-item__label) {
+  color: #303133;
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 1),
+    0 0 4px rgba(255, 255, 255, 0.9);
 }
 
 .card-header {
@@ -124,12 +154,18 @@ const handleLogin = async () => {
 .card-header h2 {
   margin: 0;
   color: #303133;
+  text-shadow:
+    0 0 12px rgba(255, 255, 255, 1),
+    0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 .register-link {
   text-align: center;
   width: 100%;
-  color: #909399;
+  color: #606266;
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 1),
+    0 0 3px rgba(255, 255, 255, 0.95);
 }
 </style>
 

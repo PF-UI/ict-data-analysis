@@ -3,7 +3,7 @@
     <el-card>
       <template #header>
         <div class="card-header">
-          <h3>2022-2025年招聘要求词云分析</h3>
+          <h3>2022-2026年招聘要求词云分析</h3>
           <div class="header-controls">
             <el-select v-model="selectedYear" placeholder="选择年份" style="width: 150px" @change="handleYearChange">
               <el-option label="全部年份" value="all" />
@@ -124,7 +124,7 @@ const getTagType = (index: number): string => {
 const loadWordCloudStatistics = async () => {
   loading.value = true
   try {
-    const data = await jobListingService.getWordCloudStatistics(2022, 2025, topN.value, 2)
+    const data = await jobListingService.getWordCloudStatistics(2022, 2026, topN.value, 2)
     statisticsData.value = data
     years.value = data.years
     topN.value = Math.min(100, data.wordcloud.length)

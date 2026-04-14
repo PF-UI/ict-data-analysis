@@ -1,0 +1,5 @@
+id: recruitment_qa
+system_prompt: recruitment_qa_system
+native_tools:
+  - neo4j_cypher
+mcp_server_names: []

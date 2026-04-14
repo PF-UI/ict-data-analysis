@@ -3,12 +3,14 @@ import json
 import time
 import hashlib
 import logging
+import threading
 import pandas as pd
 from dataclasses import dataclass, field
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dotenv import load_dotenv
+import json_repair
 
 # LangChain 核心依赖
 from langchain_core.documents import Document
@@ -33,11 +35,15 @@ from tenacity import (
     RetryError
 )
 from langchain_core.exceptions import OutputParserException
+from langchain_core.messages import HumanMessage
+from langchain_core.runnables import RunnableLambda
 
 # 配置日志
 # 获取当前文件所在目录（Kg/）
 log_dir = Path(__file__).parent
 log_file = log_dir / f"llm_kg_{time.strftime('%Y%m%d')}.log"
+# LLM token 用量单独文件（首行：系统/模板提示词 token；后续：每次调用的输入/输出 token）
+token_usage_log_file = log_dir / f"llm_kg_tokens_{time.strftime('%Y%m%d')}.log"
 
 # 创建文件处理器（追加模式）
 file_handler = logging.FileHandler(log_file, encoding='utf-8', mode='a')
@@ -59,6 +65,92 @@ logging.basicConfig(
 )
 logger = logging.getLogger("JobKGEngineer")
 logger.info(f"日志文件已创建: {log_file}")
+logger.info(f"Token 用量日志（单独文件）: {token_usage_log_file}")
+
+
+def _extract_usage_from_ai_message(result: Any) -> Dict[str, Any]:
+    """从 AIMessage / ChatResult 兼容结构中提取 token_usage 字典。"""
+    md = getattr(result, "response_metadata", None) or {}
+    if not isinstance(md, dict):
+        return {}
+    u = md.get("token_usage") or md.get("usage")
+    if isinstance(u, dict):
+        return u
+    return {}
+
+
+def _estimate_system_prompt_tokens(base_llm, text: str) -> tuple[int, str]:
+    """
+    估算「单条 HumanMessage 文本」的 token 数。
+    优先用 LangChain；对 qwen 等未实现 get_num_tokens_from_messages 的模型回退到 tiktoken(cl100k_base)，
+    再失败则用极简字符启发式（仅作数量级参考）。
+    返回 (token 数, 方法标记)。
+    """
+    try:
+        n = base_llm.get_num_tokens_from_messages([HumanMessage(content=text)])
+        return int(n), "langchain_native"
+    except Exception as e:
+        err = str(e)
+        logger.debug(f"LangChain 本地 token 计数不可用，将回退: {err[:300]}")
+        try:
+            import tiktoken
+
+            enc = tiktoken.get_encoding("cl100k_base")
+            n = len(enc.encode(text))
+            logger.info(f"系统提示词 token 估算（tiktoken cl100k_base，近似）: {n}")
+            return n, "tiktoken_cl100k_base_approx"
+        except Exception as e2:
+            n = max(1, len(text) // 2)
+            logger.warning(
+                f"系统提示词 token 使用字符启发式估算: n={n}（tiktoken 失败: {e2!s}）"
+            )
+            return n, "chars_div2_fallback"
+
+
+def build_token_logging_llm_runnable(base_llm, token_log_path: Path, static_prompt_text: str) -> RunnableLambda:
+    """
+    包装 ChatModel：首行写入「系统/模板提示词」token 估算（input_text 为空时的完整模板）；
+    之后每次 invoke 追加一行本次 API 返回的 prompt/completion/total tokens。
+    """
+    lock = threading.Lock()
+    call_count = [0]
+
+    def _write_system_prompt_line() -> None:
+        with lock:
+            with open(token_log_path, "a", encoding="utf-8") as f:
+                ts = time.strftime("%Y-%m-%d %H:%M:%S")
+                n, method = _estimate_system_prompt_tokens(base_llm, static_prompt_text)
+                f.write(
+                    f"{ts}\tSYSTEM_PROMPT_TEMPLATE\tprompt_tokens={n}\tmethod={method}\n"
+                )
+
+    _write_system_prompt_line()
+
+    def _invoke_with_token_log(input, config=None, **kwargs):
+        result = base_llm.invoke(input, config=config, **kwargs)
+        with lock:
+            call_count[0] += 1
+            ncall = call_count[0]
+            usage = _extract_usage_from_ai_message(result)
+            pt = usage.get("prompt_tokens") or usage.get("input_tokens")
+            ct = usage.get("completion_tokens") or usage.get("output_tokens")
+            tt = usage.get("total_tokens")
+            ts = time.strftime("%Y-%m-%d %H:%M:%S")
+            with open(token_log_path, "a", encoding="utf-8") as f:
+                if usage:
+                    f.write(
+                        f"{ts}\tcall#{ncall}\tprompt_tokens={pt}\t"
+                        f"completion_tokens={ct}\ttotal_tokens={tt}\n"
+                    )
+                else:
+                    f.write(
+                        f"{ts}\tcall#{ncall}\tprompt_tokens=\tcompletion_tokens=\t"
+                        f"total_tokens=\tnote=no_usage_in_response_metadata\n"
+                    )
+        return result
+
+    return RunnableLambda(_invoke_with_token_log)
+
 
 # ==================== 1. 环境配置与常量定义 ====================
 env_path = project_root / ".env"
@@ -67,7 +159,7 @@ load_dotenv(dotenv_path=env_path)  # 加载 .env 文件中的环境变量
 # LLM 配置
 LLM_MODEL = os.getenv("LLM_MODEL", "qwen3-max")
 LLM_API_KEY = os.getenv("LLM_API_KEY")
-LLM_BASE_URL = os.getenv("LLM_BASE_URL", "http://localhost:3000/v1")
+LLM_BASE_URL = os.getenv("LLM_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1")
 LLM_TEMPERATURE = float(os.getenv("LLM_TEMPERATURE", "0.0"))
 
 # Neo4j 配置
@@ -129,8 +221,13 @@ NODE_SCHEMAS = [
     # 第五个节点类型：地点（Location）
     NodeSchema(
         type="Location",
-        properties=["name", "city", "province"],  # 地点节点属性：名称、所属城市、所属省份
-        description="Geographical location of the job (e.g., Beijing, Shanghai)"
+        properties=["name", "city", "province"],
+        description=(
+            "Administrative location at country/province/city level only. "
+            "Rules: (1) Province node: name and province use the same standard name (e.g. 湖北省); leave city empty. "
+            "(2) City node: name matches city (e.g. 武汉市); set province to its parent province; city can repeat name for clarity. "
+            "(3) Country node: e.g. 中国; province/city empty. No street/building/floor."
+        ),
     ),
     # 第六个节点类型：年份（Year）
     NodeSchema(
@@ -149,34 +246,42 @@ RELATIONSHIP_SCHEMAS = [
     RelationshipSchema("JobPosting", "REQUIRES_SKILL", "Skill", ["proficiency_level"]),
     # 关系4：公司（Company）位于（LOCATED_IN）地点（Location）
     RelationshipSchema("Company", "LOCATED_IN", "Location"),
-    # 关系5：具体招聘（JobPosting）属于年份（YEAR）年份（Year）
-    RelationshipSchema("JobPosting", "YEAR", "Year")
+    # 关系5：地点层级（城市 Location 属于 省份 Location）
+    RelationshipSchema("Location", "BELONGS_TO", "Location"),
+    # 关系6：具体招聘（JobPosting）与统计年份（Year）；关系类型为 YEAR（勿与标签 Year 混淆）
+    RelationshipSchema("JobPosting", "YEAR", "Year"),
 ]
 
-# 额外提取规则
+# 额外提取规则（与 NODE_SCHEMAS / RELATIONSHIP_SCHEMAS 一致；勿引入未在 schema 中声明的类型）
 ADDITIONAL_INSTRUCTIONS = """
-1. All node names must be extracted in Chinese (e.g., Python工程师 instead of Python Engineer)
-2. The 'id' of each node must be unique (use format: [type]_[name_hash], e.g., JobPosting_8f3a9d)
-3. For 'REQUIRES_SKILL' relationship, add 'proficiency_level' property (e.g., 熟练, 精通, 了解)
-4. Only extract information explicitly mentioned in the text, do not infer
-# Company 节点强制规则
-5. Company 节点的 'name' 必须是具体的公司全称或简称（如华为、深信服、锐捷），禁止使用"公司"、"本公司"、"我司"等泛称
-6. 如果文本中没有明确的公司名称，**禁止生成 Company 节点**
-7. Company 节点必须包含 'name' 属性，'industry' 为可选属性
-# Location 节点强制规则
-8. Location 节点分为三级层级：国家（如中国）、省份（如湖北省）、城市（如武汉市），**禁止提取具体街道、大厦、楼层等详细地址**
-9. Location 节点的 'name' 必须是标准的地理名称（如"湖北省"、"武汉市"），禁止使用"工作地点"、"上班地址"等描述性文字
-10. Location 节点的 'province' 属性仅填写省级行政区（如湖北省、广东省），'city' 属性仅填写地级城市（如武汉市、广州市）
-11. 如果文本中同时提到省份和城市，生成两个 Location 节点，并建立 **城市-属于-省份** 的关系（Location->BELONGS_TO->Location）
-# JobPosting 节点规则
-12. JobPosting 节点代表具体的招聘信息，包含详细的薪资、经验要求等属性
-# 关系提取强制规则（重要！）
-13. **如果提取了 Company 节点，必须建立 JobPosting -> OFFERED_BY -> Company 关系**，将 JobPosting 节点与对应的 Company 节点连接
-14. **如果提取了 Location 节点，必须建立 JobPosting -> LOCATED_IN -> Location 关系**，将 JobPosting 节点与对应的 Location 节点连接
-15. **如果提取了 Company 节点和 Location 节点，必须建立 Company -> LOCATED_IN -> Location 关系**，将 Company 节点与对应的 Location 节点连接
-16. 关系是知识图谱的核心，**必须确保所有提取的节点都通过适当的关系连接起来**
-17. 注意区分文档中的多条招聘数据，不要将不同的数据混合在一起
-18. **如果 metadata 中包含 data_year 字段，必须建立 JobPosting -> YEAR -> Year 关系**，将具体招聘与年份连接
+【全局】
+1. 节点展示名、实体名用中文（技能名可用约定俗成的中英文，如 Python）。
+2. 每个节点 id 唯一，格式 [Type]_[hash]，如 JobPosting_8f3a9d。
+3. 仅抽取文本中明确出现的信息，禁止臆造公司名、地点、技能；与下述「必须连边」冲突时，**宁可少建节点，不可编造**。
+4. REQUIRES_SKILL 关系必须带属性 proficiency_level（如 熟练、精通、了解）。
+
+【Company】
+5. name 须为真实公司全称或常用简称；禁止「公司」「本公司」「我司」等泛称。
+6. 无明确公司名则**不要**创建 Company，也不要为其连边。
+
+【Location】
+7. 仅国家/省/市层级；禁止街道、楼宇、楼层。
+8. name 为标准地名（如 湖北省、武汉市）；禁止用「工作地点」等描述语。
+9. 省级节点：name 与 province 一致；city 留空。市级节点：name 与 city 一致；province 填所属省。
+10. 文本同时出现省和市时：建两个 Location 节点，并建 **市 Location -[BELONGS_TO]-> 省 Location**（方向：城市指向省份）。
+
+【JobPosting】
+11. 表示一条招聘岗位；填充 name、salary、experience_requirement 等已声明属性。
+
+【关系 — 对「已抽取」的节点必须满足】
+12. 若存在 Company：JobPosting -[OFFERED_BY]-> Company。
+13. 若存在 Location：JobPosting -[LOCATED_IN]-> Location（可连到市或省节点，与文本一致）。
+14. 若同时存在 Company 与 Location：Company -[LOCATED_IN]-> Location（通常与岗位工作地点一致）。
+15. 若 metadata 含 data_year：JobPosting -[YEAR]-> Year（Year.name 与该年份一致，如 2026）。
+16. 多条招聘混在同一文本时，按条拆分，勿合并不同岗位。
+
+【图连通性】
+17. 除孤立禁止项外，已抽取的节点应通过上述关系连成图；未抽取的 Company 不要求 12、14。
 """
 
 # ==================== 2. 核心工程化组件 ====================
@@ -648,25 +753,56 @@ class ProcessStateManager:
         if not self.state_file.exists():
             with open(self.state_file, "w", encoding="utf-8") as f:
                 json.dump({
-                    "last_processed_id": 0,
+                    "last_extracted_id": 0,
+                    "last_imported_id": 0,
                     "failed_ids": [],
                     "last_update": None
                 }, f, ensure_ascii=False, indent=2)
         else:
-            # 兼容旧格式：如果有 processed_ids，转换为 last_processed_id
+            # 兼容旧格式：迁移到 extracted/imported 双游标
             try:
                 with open(self.state_file, "r", encoding="utf-8") as f:
                     state = json.load(f)
-                    if "processed_ids" in state and "last_processed_id" not in state:
-                        # 迁移旧格式：取最大ID作为 last_processed_id
-                        processed_ids = state.get("processed_ids", [])
-                        if processed_ids:
-                            last_id = max(processed_ids)
-                            logger.info(f"迁移状态格式: processed_ids ({len(processed_ids)} 个) -> last_processed_id={last_id}")
-                            state["last_processed_id"] = last_id
-                            del state["processed_ids"]
-                            with open(self.state_file, "w", encoding="utf-8") as f:
-                                json.dump(state, f, ensure_ascii=False, indent=2)
+                changed = False
+
+                # 最旧格式：processed_ids -> last_processed_id
+                if "processed_ids" in state and "last_processed_id" not in state:
+                    processed_ids = state.get("processed_ids", [])
+                    last_id = max(processed_ids) if processed_ids else 0
+                    state["last_processed_id"] = last_id
+                    del state["processed_ids"]
+                    logger.info(f"迁移状态格式: processed_ids -> last_processed_id={last_id}")
+                    changed = True
+
+                # 旧格式：last_processed_id -> 双游标（默认两者一致）
+                if "last_processed_id" in state:
+                    last_id = int(state.get("last_processed_id") or 0)
+                    if "last_extracted_id" not in state:
+                        state["last_extracted_id"] = last_id
+                        changed = True
+                    if "last_imported_id" not in state:
+                        state["last_imported_id"] = last_id
+                        changed = True
+                    del state["last_processed_id"]
+                    changed = True
+
+                # 新字段兜底
+                if "last_extracted_id" not in state:
+                    state["last_extracted_id"] = 0
+                    changed = True
+                if "last_imported_id" not in state:
+                    state["last_imported_id"] = 0
+                    changed = True
+                if "failed_ids" not in state:
+                    state["failed_ids"] = []
+                    changed = True
+                if "last_update" not in state:
+                    state["last_update"] = None
+                    changed = True
+
+                if changed:
+                    with open(self.state_file, "w", encoding="utf-8") as f:
+                        json.dump(state, f, ensure_ascii=False, indent=2)
             except Exception as e:
                 logger.warning(f"状态文件迁移失败: {e}")
     
@@ -675,19 +811,22 @@ class ProcessStateManager:
         try:
             with open(self.state_file, "r", encoding="utf-8") as f:
                 state = json.load(f)
-                # 确保有 last_processed_id 字段
-                if "last_processed_id" not in state:
-                    state["last_processed_id"] = 0
+                # 兜底，保证关键字段存在
+                state.setdefault("last_extracted_id", int(state.get("last_processed_id", 0) or 0))
+                state.setdefault("last_imported_id", int(state.get("last_processed_id", 0) or 0))
+                state.setdefault("failed_ids", [])
+                state.setdefault("last_update", None)
                 return state
         except Exception as e:
             logger.error(f"加载状态文件失败: {e}")
-            return {"last_processed_id": 0, "failed_ids": [], "last_update": None}
+            return {"last_extracted_id": 0, "last_imported_id": 0, "failed_ids": [], "last_update": None}
     
-    def save_state(self, last_processed_id: int, failed_ids: List[int]):
+    def save_state(self, last_extracted_id: int, last_imported_id: int, failed_ids: List[int]):
         """保存处理状态"""
         try:
             state = {
-                "last_processed_id": last_processed_id,
+                "last_extracted_id": int(last_extracted_id),
+                "last_imported_id": int(last_imported_id),
                 "failed_ids": failed_ids,
                 "last_update": time.strftime("%Y-%m-%d %H:%M:%S")
             }
@@ -696,22 +835,41 @@ class ProcessStateManager:
         except Exception as e:
             logger.error(f"保存状态文件失败: {e}")
     
-    def get_last_processed_id(self) -> int:
-        """获取最后处理的ID"""
+    def get_last_extracted_id(self) -> int:
+        """获取最后成功提取的ID"""
         state = self.load_state()
-        return state.get("last_processed_id", 0)
+        return int(state.get("last_extracted_id", 0) or 0)
+
+    def get_last_imported_id(self) -> int:
+        """获取最后成功入库的ID（续跑依据）"""
+        state = self.load_state()
+        return int(state.get("last_imported_id", 0) or 0)
+
+    def get_last_processed_id(self) -> int:
+        """兼容旧调用：返回 last_imported_id 作为“已处理”进度"""
+        return self.get_last_imported_id()
     
     def get_failed_ids(self) -> set:
         """获取失败的ID集合"""
         state = self.load_state()
         return set(state.get("failed_ids", []))
     
-    def update_last_processed_id(self, record_id: int):
-        """更新最后处理的ID（只保留最大的ID）"""
+    def update_last_extracted_id(self, record_id: int):
+        """更新最后提取ID（只保留最大的ID）"""
         state = self.load_state()
-        current_last = state.get("last_processed_id", 0)
+        current_last = int(state.get("last_extracted_id", 0) or 0)
         if record_id > current_last:
-            state["last_processed_id"] = record_id
+            state["last_extracted_id"] = int(record_id)
+            state["last_update"] = time.strftime("%Y-%m-%d %H:%M:%S")
+            with open(self.state_file, "w", encoding="utf-8") as f:
+                json.dump(state, f, ensure_ascii=False, indent=2)
+
+    def update_last_imported_id(self, record_id: int):
+        """更新最后入库ID（只保留最大的ID）"""
+        state = self.load_state()
+        current_last = int(state.get("last_imported_id", 0) or 0)
+        if record_id > current_last:
+            state["last_imported_id"] = int(record_id)
             state["last_update"] = time.strftime("%Y-%m-%d %H:%M:%S")
             with open(self.state_file, "w", encoding="utf-8") as f:
                 json.dump(state, f, ensure_ascii=False, indent=2)
@@ -740,7 +898,7 @@ class ProcessStateManager:
     
     def clear_state(self):
         """清空状态（重新开始）"""
-        self.save_state(0, [])
+        self.save_state(0, 0, [])
 
 class CacheManager:
     """图谱提取结果缓存管理器（基于文件系统）"""
@@ -865,18 +1023,87 @@ class CacheManager:
             json.dump({}, f, ensure_ascii=False, indent=2)
         logger.info("✅ 所有缓存已清空")
 
+
+def sanitize_llm_graph_json(parsed_json: Any) -> Dict[str, Any]:
+    """
+    丢弃指向不存在节点 id 的关系，避免 LLMGraphTransformer 在 _parse_and_clean_json 里
+    因 Relationship(source/target=None) 触发 Pydantic 校验失败。
+    """
+    if not isinstance(parsed_json, dict):
+        return {"nodes": [], "relationships": []}
+    nodes = parsed_json.get("nodes") or []
+    if not isinstance(nodes, list):
+        nodes = []
+    rels = parsed_json.get("relationships") or []
+    if not isinstance(rels, list):
+        rels = []
+    node_ids: set[str] = set()
+    for n in nodes:
+        if isinstance(n, dict) and n.get("id") is not None:
+            n["id"] = str(n["id"])
+            node_ids.add(n["id"])
+    filtered: List[Dict[str, Any]] = []
+    dropped = 0
+    for r in rels:
+        if not isinstance(r, dict):
+            dropped += 1
+            continue
+        s, t = r.get("source"), r.get("target")
+        if s is None or t is None:
+            dropped += 1
+            continue
+        ss, tt = str(s), str(t)
+        if ss not in node_ids or tt not in node_ids:
+            dropped += 1
+            continue
+        # 与 node_map 键一致（避免 JSON 中数字 id 与字符串 id 混用导致 lookup 为 None）
+        filtered.append({**r, "source": ss, "target": tt})
+    if dropped:
+        logger.warning(
+            f"已丢弃 {dropped} 条无效关系（source/target 不在 nodes 列表或为空），避免解析崩溃"
+        )
+    parsed_json["nodes"] = nodes
+    parsed_json["relationships"] = filtered
+    return parsed_json
+
+
 class RobustLLMGraphTransformer:
     """带重试和异常处理的 LLMGraphTransformer 封装"""
     def __init__(self):
         # 初始化 LLM
         self.llm = llm
-        # 初始化官方 LLMGraphTransformer
+        # 初始化官方 LLMGraphTransformer（先挂原始 llm 以生成与库一致的 prompt）
         self.transformer = LLMGraphTransformer(
             llm=self.llm,
             allowed_nodes=NODE_SCHEMAS,
             allowed_relationships=RELATIONSHIP_SCHEMAS,
             additional_instructions=ADDITIONAL_INSTRUCTIONS
         )
+        # Token 用量单独写入 token_usage_log_file：首行系统/模板提示词 token，后续每次调用一行
+        static_prompt_text = self.transformer.prompt.format(input_text="")
+        logged_runnable = build_token_logging_llm_runnable(
+            self.llm, token_usage_log_file, static_prompt_text
+        )
+        self.transformer.chain = self.transformer.prompt | logged_runnable
+
+    def _convert_to_graph_document_safe(self, document: Document, config: Any = None):
+        """
+        与 LLMGraphTransformer.convert_to_graph_document 等价，但在解析前对 JSON 做关系清洗，
+        避免关系引用缺失节点导致 Pydantic ValidationError。
+        """
+        from LLMGraphTransformer.main import _parse_and_clean_json, _format_graph
+        from LLMGraphTransformer.schema import GraphDocument
+
+        text = document.page_content
+        raw_schema = self.transformer.chain.invoke({"input_text": text}, config=config)
+        if not isinstance(raw_schema, str):
+            raw_schema = raw_schema.content
+        parsed_json = json_repair.loads(raw_schema)
+        parsed_json = sanitize_llm_graph_json(parsed_json)
+        parsed_nodes, parsed_rels = _parse_and_clean_json(parsed_json)
+        nodes, relationships = _format_graph(parsed_nodes, parsed_rels)
+        nodes, relationships = self.transformer.graph_strict_mode_filtering(nodes, relationships)
+        return GraphDocument(nodes=nodes, relationships=relationships, source=document)
 
     @retry(
         stop=stop_after_attempt(MAX_RETRIES),
@@ -888,7 +1115,7 @@ class RobustLLMGraphTransformer:
         """提取单个文档的图谱数据（带重试和清洗）"""
         try:
             # 执行提取
-            graph_doc = self.transformer.convert_to_graph_document(doc)
+            graph_doc = self._convert_to_graph_document_safe(doc)
             
             # 转换为字典格式
             nodes = []
@@ -976,7 +1203,7 @@ class RobustLLMGraphTransformer:
         """批量提取多个文档的图谱数据（合并为一个LLM调用）"""
         try:
             # 执行提取（一次性处理整个批次）
-            graph_doc = self.transformer.convert_to_graph_document(merged_doc)
+            graph_doc = self._convert_to_graph_document_safe(merged_doc)
             
             # 转换为字典格式
             all_nodes = []
@@ -1132,6 +1359,8 @@ def load_job_data_from_mysql(
         engine.dispose()
         
         logger.info(f"从数据库读取原始数据行数: {len(df)}")
+        # 供 build_job_kg 判断「是否还有下一页」：须用清洗前行数，不能用 dropna 后的 len(df)
+        df.attrs["mysql_raw_rows"] = int(len(df))
         
         # 处理 requirements 字段
         df["requirements_text"] = df["requirements"].apply(parse_requirements)
@@ -1180,7 +1409,7 @@ def batch_extract_graph(
     documents: List[Document], 
     cache_manager: CacheManager,
     state_manager: ProcessStateManager = None
-) -> List[ExtractionResult]:
+) -> Tuple[List[ExtractionResult], int]:
     """批量并行提取图谱数据（带缓存和断点续传，按BATCH_SIZE分组）"""
     start_time = time.time()
     transformer = RobustLLMGraphTransformer()
@@ -1189,8 +1418,8 @@ def batch_extract_graph(
     # 从状态管理器获取现有状态
     existing_failed = state_manager.get_failed_ids() if state_manager else set()
     
-    # 本次批次处理的最大ID和失败的ID
-    max_processed_id = 0
+    # 本次批次提取成功的最大ID和失败ID
+    max_extracted_id = 0
     new_failed_ids = set()
     
     # 分批次处理
@@ -1222,7 +1451,7 @@ def batch_extract_graph(
                         state_manager.remove_failed(record_id)
                     try:
                         record_id_int = int(record_id)
-                        max_processed_id = max(max_processed_id, record_id_int)
+                        max_extracted_id = max(max_extracted_id, record_id_int)
                     except (ValueError, TypeError):
                         pass
                     logger.debug(f"使用缓存: {doc.metadata.get('job_title')}")
@@ -1295,7 +1524,7 @@ def batch_extract_graph(
                             if state_manager and record_id:
                                 try:
                                     record_id_int = int(record_id)
-                                    max_processed_id = max(max_processed_id, record_id_int)
+                                    max_extracted_id = max(max_extracted_id, record_id_int)
                                 except (ValueError, TypeError):
                                     pass
                             
@@ -1326,12 +1555,12 @@ def batch_extract_graph(
                         new_failed_ids.add(record_id)
                         state_manager.add_failed(record_id)
     
-    # 保存最终状态（更新 last_processed_id）
-    if state_manager and max_processed_id > 0:
-        current_last_id = state_manager.get_last_processed_id()
-        if max_processed_id > current_last_id:
-            state_manager.update_last_processed_id(max_processed_id)
-            logger.info(f"状态已更新: last_processed_id={max_processed_id}, 新增失败 {len(new_failed_ids)} 条")
+    # 保存提取游标（入库游标由主流程在每批入库成功后更新）
+    if state_manager and max_extracted_id > 0:
+        current_last_id = state_manager.get_last_extracted_id()
+        if max_extracted_id > current_last_id:
+            state_manager.update_last_extracted_id(max_extracted_id)
+            logger.info(f"提取游标已更新: last_extracted_id={max_extracted_id}, 新增失败 {len(new_failed_ids)} 条")
     
     # 统计提取结果
     success_count = sum(1 for r in results if r.success)
@@ -1344,7 +1573,7 @@ def batch_extract_graph(
     logger.info(f"提取失败: {fail_count}")
     logger.info(f"总耗时: {total_time:.2f} 秒")
     
-    return results
+    return results, max_extracted_id
 
 # ==================== 4. Neo4j 导入函数 ====================
 
@@ -1364,8 +1593,8 @@ def load_to_neo4j_with_validation(results: List[ExtractionResult]):
         raise
 
     # 开发环境清空数据库（生产环境注释）
-    graph.query("MATCH (n) DETACH DELETE n")
-    logger.info("✅ Neo4j 数据库已清空")
+    #graph.query("MATCH (n) DETACH DELETE n")
+    #logger.info("✅ Neo4j 数据库已清空")
 
     # 统计变量
     total_nodes_created = 0
@@ -1380,10 +1609,23 @@ def load_to_neo4j_with_validation(results: List[ExtractionResult]):
     except Exception as e:
         logger.warning(f"查询已存在节点失败，将跳过重复校验: {e}")
 
+    skipped_failed = 0
+    first_failed_msg: Optional[str] = None
+    skipped_rel_missing = 0
+    skipped_rel_endpoints = 0
+    failed_nodes = 0
+    failed_rels = 0
+    sample_rel_missing: Optional[str] = None
+    sample_rel_endpoints: Optional[str] = None
+    sample_node_err: Optional[str] = None
+    sample_rel_err: Optional[str] = None
+
     # 批量导入
     for result in results:
         if not result.success:
-            logger.warning(f"跳过失败的提取结果: {result.error_msg}")
+            skipped_failed += 1
+            if first_failed_msg is None and result.error_msg:
+                first_failed_msg = str(result.error_msg)[:200]
             continue
         
         # 1. 创建节点
@@ -1408,7 +1650,10 @@ def load_to_neo4j_with_validation(results: List[ExtractionResult]):
                 existing_nodes.add(node_id)
                 logger.debug(f"创建节点成功: {node_type} - {node_id}")
             except Exception as e:
-                logger.error(f"创建节点失败 {node_id}: {e}")
+                failed_nodes += 1
+                if sample_node_err is None:
+                    sample_node_err = f"{node_id}: {e}"
+                logger.debug(f"创建节点失败 {node_id}: {e}")
         
         # 2. 创建关系
         for rel in result.relationships:
@@ -1420,12 +1665,16 @@ def load_to_neo4j_with_validation(results: List[ExtractionResult]):
             
             # 校验必要字段
             if not source_id or not target_id or not rel_type:
-                logger.warning(f"跳过无效关系: 缺少必要字段 {source_id}-{rel_type}-{target_id}")
+                skipped_rel_missing += 1
+                if sample_rel_missing is None:
+                    sample_rel_missing = f"{source_id}-{rel_type}-{target_id}"
                 continue
             
             # 检查源/目标节点是否存在
             if source_id not in existing_nodes or target_id not in existing_nodes:
-                logger.warning(f"跳过关系 {source_id}-{rel_type}-{target_id}: 源/目标节点不存在")
+                skipped_rel_endpoints += 1
+                if sample_rel_endpoints is None:
+                    sample_rel_endpoints = f"{source_id}-{rel_type}-{target_id}"
                 continue
             
             # 构建关系创建语句（优化：避免笛卡尔积警告）
@@ -1456,7 +1705,27 @@ def load_to_neo4j_with_validation(results: List[ExtractionResult]):
                     total_rels_created += 1
                 logger.debug(f"创建关系成功: {source_id}-{rel_type}-{target_id}")
             except Exception as e:
-                logger.error(f"创建关系失败 {source_id}-{rel_type}-{target_id}: {e}")
+                failed_rels += 1
+                if sample_rel_err is None:
+                    sample_rel_err = f"{source_id}-{rel_type}-{target_id}: {e}"
+                logger.debug(f"创建关系失败 {source_id}-{rel_type}-{target_id}: {e}")
+
+    if skipped_failed:
+        logger.warning(
+            f"跳过失败的提取结果共 {skipped_failed} 条"
+            + (f"，示例: {first_failed_msg}" if first_failed_msg else "")
+        )
+    if skipped_rel_missing or skipped_rel_endpoints or failed_nodes or failed_rels:
+        parts = []
+        if skipped_rel_missing:
+            parts.append(f"关系缺字段 {skipped_rel_missing} 条" + (f"（例: {sample_rel_missing}）" if sample_rel_missing else ""))
+        if skipped_rel_endpoints:
+            parts.append(f"端点未入库 {skipped_rel_endpoints} 条" + (f"（例: {sample_rel_endpoints}）" if sample_rel_endpoints else ""))
+        if failed_nodes:
+            parts.append(f"创建节点异常 {failed_nodes} 次" + (f"（例: {sample_node_err}）" if sample_node_err else ""))
+        if failed_rels:
+            parts.append(f"创建关系异常 {failed_rels} 次" + (f"（例: {sample_rel_err}）" if sample_rel_err else ""))
+        logger.warning("Neo4j 导入跳过/异常汇总: " + "；".join(parts))
 
     # 刷新 Neo4j 模式
     graph.refresh_schema()
@@ -1485,11 +1754,10 @@ def build_job_kg(resume: bool = True, batch_limit: int = 500):
     state_manager = ProcessStateManager() if DATA_SOURCE.lower() == "mysql" else None
     
     # 清空缓存/状态（可选）
-    cache_manager.clear_cache()  # 如需重新提取，取消注释
-    if state_manager:
-        state_manager.clear_state()  # 如需重新开始，取消注释
+    #cache_manager.clear_cache()  # 如需重新提取，取消注释
+    # if state_manager:
+    #     state_manager.clear_state()  # 如需重新开始，取消注释
     
-    all_extraction_results = []
     total_processed = 0
     
     # 2. 分批处理数据（支持断点续传）
@@ -1505,15 +1773,15 @@ def build_job_kg(resume: bool = True, batch_limit: int = 500):
             cache_manager.clear_cache()
         
         # 获取断点续传状态（使用范围查询优化）
-        last_processed_id = state_manager.get_last_processed_id() if state_manager and resume else 0
+        last_imported_id = state_manager.get_last_imported_id() if state_manager and resume else 0
         failed_ids = state_manager.get_failed_ids() if state_manager else set()
         
         # 加载数据（使用范围查询：id > last_processed_id OR id IN (failed_ids)）
         logger.info(f"\n=== 加载数据批次 (第 {iteration} 次循环) ===")
-        logger.info(f"最后处理ID: {last_processed_id}, 失败记录数: {len(failed_ids)}")
+        logger.info(f"最后入库ID: {last_imported_id}, 失败记录数: {len(failed_ids)}")
         
         df = load_job_data(
-            last_processed_id=last_processed_id if resume else 0,
+            last_processed_id=last_imported_id if resume else 0,
             failed_ids=failed_ids if resume else None,
             limit=batch_limit
         )
@@ -1575,17 +1843,28 @@ def build_job_kg(resume: bool = True, batch_limit: int = 500):
         logger.info(f"✅ 加载文档数: {len(documents)}")
         
         # 4. 批量提取图谱（每次处理BATCH_SIZE条）
-        extraction_results = batch_extract_graph(documents, cache_manager, state_manager)
-        all_extraction_results.extend(extraction_results)
+        extraction_results, batch_max_extracted_id = batch_extract_graph(documents, cache_manager, state_manager)
         total_processed += len(documents)
         
         logger.info(f"累计已处理: {total_processed} 条记录")
         
-        # 状态已在 batch_extract_graph 中保存，这里记录批次完成信息
+        # 每批导入：确保“入库成功后再推进入库游标”
+        logger.info(f"\n=== 开始导入 Neo4j（第 {iteration} 批） ===")
+        logger.info(f"本批提取结果数: {len(extraction_results)}")
+        load_to_neo4j_with_validation(extraction_results)
+        if state_manager and batch_max_extracted_id > 0:
+            state_manager.update_last_imported_id(batch_max_extracted_id)
+            logger.info(f"入库游标已更新: last_imported_id={batch_max_extracted_id}")
+
+        # 状态记录
         if state_manager:
-            current_last_id = state_manager.get_last_processed_id()
+            current_last_imported_id = state_manager.get_last_imported_id()
+            current_last_extracted_id = state_manager.get_last_extracted_id()
             current_failed = state_manager.get_failed_ids()
-            logger.info(f"当前状态: 最后处理ID={current_last_id}, 失败 {len(current_failed)} 条")
+            logger.info(
+                f"当前状态: 提取游标={current_last_extracted_id}, "
+                f"入库游标={current_last_imported_id}, 失败 {len(current_failed)} 条"
+            )
         
         # 如果本次没有处理任何新数据（全部跳过），说明没有新数据需要处理
         actual_processed = len(extraction_results)
@@ -1595,10 +1874,15 @@ def build_job_kg(resume: bool = True, batch_limit: int = 500):
             break
         
         # 处理完当前批次，记录状态
-        logger.info(f"✅ 当前批次（{len(df)} 条）处理完成，状态已保存")
+        logger.info(f"✅ 当前批次（清洗后 {len(df)} 条）处理完成，状态已保存")
         
-        # 如果本次加载的数据少于批次限制，说明已经是最后一批数据
-        if len(df) < batch_limit:
+        # 若 MySQL 本次 SQL 返回行数 < limit，说明无下一页；不能用清洗后行数（否则易误判提前退出）
+        if DATA_SOURCE.lower() == "mysql":
+            raw_rows = int(df.attrs.get("mysql_raw_rows", len(df)))
+            if raw_rows < batch_limit:
+                logger.info("✅ 所有数据处理完成（MySQL 本页原始行数未达批次上限），退出循环")
+                break
+        elif len(df) < batch_limit:
             logger.info("✅ 所有数据处理完成，退出循环")
             break
         
@@ -1607,12 +1891,6 @@ def build_job_kg(resume: bool = True, batch_limit: int = 500):
     
     if iteration >= max_iterations:
         logger.warning(f"⚠️ 达到最大迭代次数 {max_iterations}，强制退出循环")
-    
-    # 5. 导入 Neo4j（可选，可以分批导入或最后统一导入）
-    if all_extraction_results:
-        logger.info(f"\n=== 开始导入 Neo4j ===")
-        logger.info(f"总提取结果数: {len(all_extraction_results)}")
-        load_to_neo4j_with_validation(all_extraction_results)
     
     logger.info("🎉 招聘知识图谱构建完成！")
 

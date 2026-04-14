@@ -28,14 +28,14 @@ async def get_current_user(
     )
     
     # 调试：打印接收到的 token（仅前20个字符）
-    print(f"🔑 接收到的 token: {token[:20]}..." if len(token) > 20 else f"🔑 接收到的 token: {token}")
+    #print(f"🔑 接收到的 token: {token[:20]}..." if len(token) > 20 else f"🔑 接收到的 token: {token}")
     
     payload = decode_access_token(token)
     if payload is None:
-        print("❌ Token 解码失败")
+        #print("❌ Token 解码失败")
         raise credentials_exception
     
-    print(f"✅ Token 解码成功，payload: {payload}")
+    #print(f"✅ Token 解码成功，payload: {payload}")
     
     # JWT sub 字段是字符串，需要转换为整数
     user_id_str = payload.get("sub")

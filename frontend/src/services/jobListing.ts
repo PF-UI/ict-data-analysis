@@ -70,14 +70,14 @@ export const jobListingService = {
   },
 
   // 获取薪资统计数据
-  async getSalaryStatistics(startYear: number = 2022, endYear: number = 2025): Promise<SalaryStatistics> {
+  async getSalaryStatistics(startYear: number = 2022, endYear: number = 2026): Promise<SalaryStatistics> {
     return api.get('/job-listings/salary-statistics', {
       params: { start_year: startYear, end_year: endYear }
     })
   },
 
   // 获取地理分布统计数据
-  async getLocationStatistics(startYear: number = 2022, endYear: number = 2025): Promise<LocationStatistics> {
+  async getLocationStatistics(startYear: number = 2022, endYear: number = 2026): Promise<LocationStatistics> {
     return api.get('/job-listings/location-statistics', {
       params: { start_year: startYear, end_year: endYear }
     })
@@ -86,7 +86,7 @@ export const jobListingService = {
   // 获取词云统计数据
   async getWordCloudStatistics(
     startYear: number = 2022, 
-    endYear: number = 2025,
+    endYear: number = 2026,
     topN: number = 100,
     minLength: number = 2
   ): Promise<WordCloudStatistics> {

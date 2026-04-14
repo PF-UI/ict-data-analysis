@@ -34,6 +34,12 @@
           >
             词云分析
           </div>
+          <div 
+            :class="['nav-item', { 'is-active': activeMenu === '/neo4j' }]"
+            @click="handleNavClick('/neo4j')"
+          >
+            知识图谱
+          </div>
         </div>
       </div>
       <div class="header-right">

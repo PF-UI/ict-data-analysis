@@ -88,7 +88,7 @@ async def get_job_listings(
 @router.get("/salary-statistics")
 async def get_salary_statistics(
     start_year: int = Query(2022, description="起始年份"),
-    end_year: int = Query(2025, description="结束年份"),
+    end_year: int = Query(2026, description="结束年份"),
     db: Session = Depends(get_db)
 ):
     """
@@ -167,7 +167,7 @@ async def get_salary_statistics(
 @router.get("/location-statistics")
 async def get_location_statistics(
     start_year: int = Query(2022, description="起始年份"),
-    end_year: int = Query(2025, description="结束年份"),
+    end_year: int = Query(2026, description="结束年份"),
     db: Session = Depends(get_db)
 ):
     """
@@ -270,7 +270,7 @@ async def get_location_statistics(
 @router.get("/wordcloud-statistics")
 async def get_wordcloud_statistics(
     start_year: int = Query(2022, description="起始年份"),
-    end_year: int = Query(2025, description="结束年份"),
+    end_year: int = Query(2026, description="结束年份"),
     top_n: int = Query(100, ge=10, le=500, description="返回前N个高频词"),
     min_length: int = Query(2, ge=1, le=10, description="词汇最小长度"),
     db: Session = Depends(get_db)

@@ -44,10 +44,17 @@ api.interceptors.response.use(
   (error) => {
     if (error.response) {
       const { status, data } = error.response
-      
+      const reqUrl = error.config?.url ?? ''
+      // 登录失败（账号/密码错误）也返回 401，不应当作会话过期，避免与业务层重复弹窗
+      const isLoginCredentialRequest =
+        reqUrl.includes('/auth/login')
+
       if (status === 401) {
+        if (isLoginCredentialRequest) {
+          return Promise.reject(error)
+        }
         const authStore = useAuthStore()
-        authStore.logout()
+        authStore.logout(true)
         ElMessage.error('登录已过期，请重新登录')
       } else if (status === 403) {
         ElMessage.error('没有权限访问')

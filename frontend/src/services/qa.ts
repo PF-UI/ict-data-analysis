@@ -9,12 +9,29 @@ export interface QuestionResponse {
   answer: string
 }
 
+export interface ChatSessionItem {
+  id: number
+  session_id: string
+  title: string
+  created_at: string
+  updated_at: string
+}
+
+export interface ChatMessageItem {
+  id: number
+  role: string
+  content_type: string
+  content: string
+  created_at: string
+}
+
 export interface WSMessage {
   type: 'start' | 'chunk' | 'done' | 'error'
   question?: string
   content?: string
   answer?: string
   error?: string
+  session_id?: string
 }
 
 export type WSMessageHandler = (message: WSMessage) => void
@@ -22,6 +39,14 @@ export type WSErrorHandler = (error: Event) => void
 export type WSCloseHandler = () => void
 
 export const qaService = {
+  async listSessions(skip = 0, limit = 50): Promise<ChatSessionItem[]> {
+    return api.get('/qa/sessions', { params: { skip, limit } })
+  },
+
+  async listMessages(sessionId: string): Promise<ChatMessageItem[]> {
+    return api.get(`/qa/sessions/${encodeURIComponent(sessionId)}/messages`)
+  },
+
   /**
    * 提问（POST 方式，保留作为备选）
    */
@@ -34,6 +59,7 @@ export const qaService = {
    */
   askQuestionStream(
     question: string,
+    sessionId: string,
     onMessage: WSMessageHandler,
     onError?: WSErrorHandler,
     onClose?: WSCloseHandler
@@ -44,7 +70,6 @@ export const qaService = {
       return () => {}
     }
 
-    // 构建 WebSocket URL
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
     const host = window.location.host
     const wsUrl = `${protocol}//${host}/api/v1/qa/ask/ws?token=${encodeURIComponent(token)}`
@@ -52,8 +77,7 @@ export const qaService = {
     const ws = new WebSocket(wsUrl)
 
     ws.onopen = () => {
-      // 发送问题
-      ws.send(JSON.stringify({ question }))
+      ws.send(JSON.stringify({ question, session_id: sessionId }))
     }
 
     ws.onmessage = (event) => {
@@ -78,7 +102,6 @@ export const qaService = {
       onClose?.()
     }
 
-    // 返回关闭函数
     return () => {
       if (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING) {
         ws.close()

@@ -1,175 +1,113 @@
-# 招聘数据管理系统 - 前端
+# 招聘知识图谱 - 前端
 
-基于 Vue 3 + Vite + TypeScript + Element Plus 的前端项目。
+Vue 3 + Vite + TypeScript + Element Plus 单页应用，对接仓库根目录的 FastAPI（`/api/v1`）。总览与启动顺序见仓库根目录 [README.md](../README.md)。
 
 ## 技术栈
 
-- **Vue 3** - 渐进式 JavaScript 框架
-- **TypeScript** - 类型安全的 JavaScript
-- **Vite** - 下一代前端构建工具
-- **Element Plus** - Vue 3 组件库
-- **Vue Router** - 官方路由管理器
-- **Pinia** - 状态管理
-- **Axios** - HTTP 客户端
+| 类别 | 技术 |
+|------|------|
+| 框架 | Vue 3、TypeScript |
+| 构建 | Vite 5 |
+| UI | Element Plus、@element-plus/icons-vue |
+| 路由与状态 | Vue Router、Pinia |
+| 请求 | Axios（`baseURL: '/api/v1'`） |
+| 可视化 | ECharts、echarts-wordcloud |
 
-## 项目结构
+## 目录结构
 
-```
+```text
 frontend/
 ├── src/
-│   ├── views/          # 页面组件
-│   │   ├── Login.vue           # 登录页
-│   │   ├── Register.vue        # 注册页
-│   │   ├── JobListings.vue     # 招聘信息列表页
-│   │   └── JobDetail.vue       # 招聘信息详情页
-│   ├── layouts/        # 布局组件
-│   │   └── MainLayout.vue      # 主布局
-│   ├── components/     # 公共组件
-│   ├── router/         # 路由配置
-│   │   └── index.ts
-│   ├── stores/         # Pinia 状态管理
-│   │   └── auth.ts             # 认证状态
-│   ├── services/       # API 服务
-│   │   ├── api.ts              # Axios 配置
-│   │   ├── auth.ts             # 认证 API
-│   │   └── jobListing.ts       # 招聘信息 API
-│   ├── App.vue         # 根组件
-│   └── main.ts         # 入口文件
-├── index.html          # HTML 模板
-├── vite.config.ts      # Vite 配置
-├── tsconfig.json       # TypeScript 配置
-└── package.json        # 项目依赖
+│   ├── views/              # 页面
+│   │   ├── Login.vue / Register.vue
+│   │   ├── QAPage.vue # 智能问答（默认首页 `/` → `/qa`）
+│   │   ├── JobListings.vue / JobDetail.vue
+│   │   ├── SalaryDistribution.vue / LocationDistribution.vue
+│   │   ├── WordCloud.vue
+│   │   └── Neo4jViewer.vue
+│   ├── layouts/MainLayout.vue
+│   ├── components/
+│   ├── router/index.ts
+│   ├── stores/auth.ts
+│   ├── services/           # api.ts、auth、jobListing、qa、neo4j
+│   ├── App.vue
+│   └── main.ts
+├── vite.config.ts
+├── package.json
+└── index.html
 ```
 
-## 安装依赖
+## 安装与脚本
 
 ```bash
 cd frontend
-npm install
-# 或
-yarn install
-# 或
-pnpm install
+npm install   # 或 yarn / pnpm
+npm run dev     # 开发
+npm run build   # 类型检查 + 生产构建 → dist/
+npm run preview # 本地预览构建结果
+npm run lint    # ESLint
 ```
 
-## 开发
+## 开发服务器与代理
 
-```bash
-npm run dev
-```
+- **本地地址**：<http://localhost:3003>（端口以 `vite.config.ts` 中 `server.port` 为准）。
+- **接口代理**：浏览器请求以 `/api` 开头时，由 Vite 转发到 `http://localhost:8000`，例如：
+  - 前端 Axios `baseURL` 为 `/api/v1`
+  - 实际请求：`http://localhost:3003/api/v1/...` → `http://localhost:8000/api/v1/...`
+- **WebSocket**：代理配置中已启用 `ws: true`，便于需要 WS 的接口。
 
-前端服务将运行在 `http://localhost:3000`
-
-## 构建
-
-```bash
-npm run build
-```
-
-构建产物将输出到 `dist/` 目录。
-
-## 预览构建结果
-
-```bash
-npm run preview
-```
-
-## 功能特性
-
-### 1. 用户认证
-- ✅ 用户登录
-- ✅ 用户注册
-- ✅ JWT Token 管理
-- ✅ 路由守卫
-
-### 2. 招聘信息管理
-- ✅ 招聘信息列表（分页）
-- ✅ 多条件搜索和筛选
-  - 关键词搜索
-  - 职位名称
-  - 公司名称
-  - 工作地点
-  - 数据年份
-- ✅ 招聘信息详情查看
-- ✅ 响应式设计
-
-## API 配置
-
-前端通过代理访问后端 API：
-
-- 开发环境：`http://localhost:3000` → 代理到 `http://localhost:8000/api/v1`
-- 生产环境：需要配置实际的后端地址
-
-代理配置在 `vite.config.ts` 中：
+当前代理片段如下（完整配置见 `vite.config.ts`）：
 
 ```typescript
 server: {
+  port: 3003,
   proxy: {
     '/api': {
       target: 'http://localhost:8000',
       changeOrigin: true,
+      ws: true,
     },
   },
 }
 ```
 
-## 环境变量
+## 环境变量（可选）
 
-可以创建 `.env` 文件配置环境变量：
+构建或部署若需写死后端地址，可在 `frontend` 下创建 `.env` / `.env.production`：
 
 ```env
-VITE_API_BASE_URL=http://localhost:8000/api/v1
+# 示例：生产环境直连后端（需与打包时代码读取方式一致）
+# VITE_API_BASE_URL=https://api.example.com/api/v1
 ```
 
-## 主要页面
+开发模式下通常**无需**配置：沿用相对路径 `/api/v1` 即可走 Vite 代理。
 
-### 登录页 (`/login`)
-- 邮箱/密码登录
-- 表单验证
-- 跳转到注册页
+## 路由与功能
 
-### 注册页 (`/register`)
-- 用户注册
-- 密码确认验证
-- 跳转到登录页
+| 路径 | 说明 |
+|------|------|
+| `/login`、`/register` | 登录、注册（未登录可访问） |
+| `/qa` | 智能问答（登录后默认进入） |
+| `/job-listings`、`/job-listings/:id` | 招聘列表与详情 |
+| `/salary-distribution`、`/location-distribution` | 薪资 / 地域分布 |
+| `/wordcloud` | 词云 |
+| `/neo4j` | Neo4j 相关展示（与后端 Neo4j 接口配合） |
 
-### 招聘信息列表 (`/job-listings`)
-- 搜索和筛选功能
-- 分页展示
-- 点击行查看详情
-- 响应式表格
+路由守卫：除登录、注册外，其余页面需已登录（Token 在 Pinia / localStorage 中维护）。
 
-### 招聘信息详情 (`/job-listings/:id`)
-- 详细信息展示
-- 返回列表按钮
+## 与后端协作
 
-## 注意事项
-
-1. **后端服务**：确保后端 FastAPI 服务运行在 `http://localhost:8000`
-2. **CORS**：后端已配置 CORS，允许所有来源（开发环境）
-3. **认证**：招聘信息接口不需要认证，但前端路由需要登录才能访问
-4. **Token 存储**：Token 存储在 localStorage 中
-
-## 开发建议
-
-1. 使用 Vue DevTools 调试
-2. 使用 Element Plus 官方文档查找组件
-3. API 调用统一使用 `services` 目录下的服务
-4. 状态管理使用 Pinia stores
+1. 先启动 API：`uvicorn app.main:app --reload --host 0.0.0.0 --port 8000`（在仓库根目录）。
+2. 再执行 `npm run dev`。
+3. 文档与调试：<http://localhost:8000/docs>。
 
 ## 常见问题
 
-### 1. 无法连接后端 API
-- 检查后端服务是否运行
-- 检查 `vite.config.ts` 中的代理配置
-- 检查浏览器控制台的错误信息
+**无法访问接口**  
+确认本机 `8000` 端口已监听、代理目标未被防火墙拦截；浏览器开发者工具查看请求是否 404/502。
 
-### 2. 登录后无法获取用户信息
-- 检查后端 `/api/v1/users/me` 接口是否正常
-- 检查 Token 是否正确传递
+**登录后仍跳回登录页**  
+检查 `/api/v1/users/me` 是否返回 200、响应里用户信息是否正常；确认请求头携带 `Authorization: Bearer <token>`。
 
-### 3. 招聘信息列表为空
-- 检查数据库是否有数据
-- 检查 API 响应是否正确
-- 查看浏览器网络请求
-
+**列表为空**  
+确认 MySQL 业务库中 `job_listings` 等表有数据，并与后端 `DATABASE_URL` 一致。

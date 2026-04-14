@@ -52,6 +52,11 @@ const router = createRouter({
           name: 'WordCloud',
           component: () => import('@/views/WordCloud.vue'),
         },
+        {
+          path: 'neo4j',
+          name: 'Neo4jViewer',
+          component: () => import('@/views/Neo4jViewer.vue'),
+        },
       ],
     },
   ],

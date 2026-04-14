@@ -1,195 +1,162 @@
-# 数据库配置和使用说明
+# 数据库配置与使用说明
 
-## 概述
+本应用涉及**两类数据库**，职责不同，请勿混淆：
 
-本项目已集成SQLAlchemy数据库支持，**默认使用MySQL数据库**（也可切换为SQLite或PostgreSQL）。
+| 用途 | 推荐引擎 | 说明 |
+|------|-----------|------|
+| **业务数据**（用户、招聘岗位等） | **MySQL**（默认） | SQLAlchemy ORM，`DATABASE_URL` |
+| **智能体记忆**（多轮对话 checkpoint） | **PostgreSQL** | LangGraph + `langgraph-checkpoint-postgres`，与业务库分离 |
 
-## 环境配置
+开发阶段可将业务库改为 **SQLite** 做快速验证；**生产环境**建议使用 MySQL（或经充分测试的其他引擎）承载业务，PostgreSQL 仅作记忆库。
 
-### 1. .env 文件配置
+完整环境变量说明还可对照根目录 [README.md](../README.md) 与 `app/core/config.py`。
 
-在项目根目录创建或编辑 `.env` 文件，添加以下数据库配置（第25-32行）：
+---
+
+## 1. 业务库：`DATABASE_URL`（SQLAlchemy）
+
+在项目根目录 `.env` 中配置，例如：
 
 ```env
-# 数据库配置（MySQL）
-DATABASE_URL=mysql+pymysql://用户名:密码@主机:端口/数据库名
-# 示例：
-# DATABASE_URL=mysql+pymysql://root:password@localhost:3306/recruitment_kg
+# MySQL（推荐，与 PyMySQL 驱动）
+DATABASE_URL=mysql+pymysql://用户名:密码@127.0.0.1:3306/数据库名
 
-# 如果使用SQLite（开发测试），使用：
-# DATABASE_URL=sqlite:///./app.db
-
-# 如果使用PostgreSQL，使用：
-# DATABASE_URL=postgresql://username:password@localhost:5432/dbname
-
-# 数据库连接池配置
+# 连接池（可选）
 DB_POOL_SIZE=5
 DB_MAX_OVERFLOW=10
 DB_POOL_RECYCLE=3600
 ```
 
-### 2. 数据库类型说明
+### MySQL 准备步骤
 
-#### MySQL（默认，推荐使用）
-```env
-DATABASE_URL=mysql+pymysql://root:password@localhost:3306/recruitment_kg
+1. 安装并启动 MySQL。  
+2. 创建数据库（示例）：
+
+```sql
+CREATE DATABASE your_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
-**配置说明：**
-- `mysql+pymysql`: 使用 PyMySQL 驱动连接 MySQL
-- `root`: MySQL 用户名
-- `password`: MySQL 密码
-- `localhost:3306`: 数据库主机和端口
-- `recruitment_kg`: 数据库名称
 
-**使用前准备：**
-1. 确保已安装 MySQL 服务器
-2. 创建数据库：
-   ```sql
-   CREATE DATABASE recruitment_kg CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-   ```
-3. 确保 MySQL 用户有相应权限
+3. 授予应用账号相应权限。  
+4. 启动 FastAPI 时会在能力范围内**自动建表**（如 `users`、`job_listings` 等，以 `app/models` 为准）。
 
-#### SQLite（开发测试使用）
+### SQLite（仅建议本地试跑）
+
 ```env
 DATABASE_URL=sqlite:///./app.db
 ```
-- 无需安装额外数据库服务器
-- 数据文件存储在 `app.db`
-- 适合快速开发测试
 
-#### PostgreSQL（可选）
+- 单文件、零安装，适合快速联调。  
+- 不建议用于生产；注意备份与并发限制。
+
+### 将业务库改为 PostgreSQL 等
+
+需保证连接串与 SQLAlchemy 驱动一致（例如使用 `postgresql+psycopg://...` 等），并在依赖中安装对应驱动。当前仓库默认开发与文档以 **MySQL + pymysql** 为主。
+
+---
+
+## 2. 智能体记忆库：PostgreSQL
+
+多轮问答、会话列表依赖 **PostgreSQL**，通过以下方式之一配置（优先级见 `Settings.get_agent_memory_database_url()`）：
+
 ```env
-DATABASE_URL=postgresql://username:password@localhost:5432/dbname
-```
-需要在 `requirements.txt` 中添加：
-```
-psycopg2-binary==2.9.9
+# 方式 A：显式连接串（推荐）
+AGENT_MEMORY_DATABASE_URL=postgresql://用户:密码@localhost:5432/agent_memory?sslmode=disable
+
+# 方式 B：用 DB_* 拼接（勿在 DB_URI 中保留未替换的 {占位符}）
+DB_USER=postgres
+DB_PASSWORD=你的密码
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=agent_memory
+PG_SSLMODE=disable
 ```
 
-#### MySQL
+可选：
+
 ```env
-DATABASE_URL=mysql+pymysql://username:password@localhost:3306/dbname
-```
-需要在 `requirements.txt` 中添加：
-```
-pymysql==1.1.0
+AGENT_MEMORY_POOL_MAX_SIZE=10
 ```
 
-## 用户表结构
+若记忆库不可用，应用启动时可能报错或日志提示；需先创建数据库并保证网络与账号权限正确。
 
-数据库会自动创建 `users` 表，包含以下字段：
+---
 
-| 字段名 | 类型 | 说明 |
-|--------|------|------|
-| id | Integer | 主键，自增 |
-| email | String(255) | 邮箱，唯一索引 |
-| name | String(100) | 用户名 |
-| hashed_password | String(255) | 密码哈希值 |
-| created_at | DateTime | 创建时间 |
-| updated_at | DateTime | 更新时间 |
+## 3. 主要数据模型（`app/models`）
 
-## 数据库初始化
+| 模块 | 表 / 用途 |
+|------|-----------|
+| `user.py` | 用户注册登录（邮箱、密码哈希等） |
+| `job_listing.py` | 招聘岗位 `job_listings` |
+| `city_mapping.py` | 城市等映射辅助数据 |
+| `history_chat.py` | 与会话/历史相关的 ORM（若启用） |
 
-数据库表会在应用启动时自动创建。如果数据库文件不存在，SQLAlchemy会自动创建。
+表结构以代码为准；启动时自动建表行为取决于 `app/database.py` 中的初始化逻辑。
 
-### 手动初始化
+---
 
-如果需要在应用启动前初始化数据库，可以运行：
+## 4. 初始化与自检
+
+应用启动时会调用 `init_db()` 等业务库初始化逻辑。也可在 Python 中手动执行（需在项目根目录保证 `app` 可导入）：
 
 ```python
 from app.database import init_db
 init_db()
 ```
 
-## 使用示例
+根目录 `test.py` 提供 MySQL 连通性示例，使用前请改为你的主机与账号（**不要提交真实密码**）。
 
-### 1. 注册新用户
+---
+
+## 5. API 调用示例
+
+以下假设服务运行在 `http://localhost:8000`，前缀为 `/api/v1`。
+
+### 注册
 
 ```bash
 curl -X POST "http://localhost:8000/api/v1/auth/register" \
   -H "Content-Type: application/json" \
-  -d '{
-    "name": "张三",
-    "email": "zhangsan@example.com",
-    "password": "password123"
-  }'
+  -d "{\"name\":\"张三\",\"email\":\"zhangsan@example.com\",\"password\":\"password123\"}"
 ```
 
-### 2. 登录获取Token
+### 登录（JSON）
 
 ```bash
 curl -X POST "http://localhost:8000/api/v1/auth/login/json" \
   -H "Content-Type: application/json" \
-  -d '{
-    "email": "zhangsan@example.com",
-    "password": "password123"
-  }'
+  -d "{\"email\":\"zhangsan@example.com\",\"password\":\"password123\"}"
 ```
 
-### 3. 查询用户列表
+### 用户列表（需 Bearer Token）
 
 ```bash
 curl -X GET "http://localhost:8000/api/v1/users/" \
   -H "Authorization: Bearer YOUR_TOKEN_HERE"
 ```
 
-## 数据库迁移（可选）
+---
 
-如果未来需要数据库迁移，可以使用 Alembic：
+## 6. 数据库迁移（可选）
 
-### 初始化 Alembic
+当前仓库**未强制内置 Alembic 工作流**。若后续需要版本化迁移，可自行在项目内初始化 Alembic，并将模型元数据指向 `app.models`。
 
-```bash
-cd app
-alembic init alembic
-```
+---
 
-### 创建迁移
+## 7. 注意事项
 
-```bash
-alembic revision --autogenerate -m "Initial migration"
-```
+1. **密钥**：`.env` 勿提交到 Git；生产环境使用强随机 `SECRET_KEY`。  
+2. **密码存储**：用户密码经 bcrypt 哈希，不明文落库。  
+3. **双库架构**：业务 MySQL（或 SQLite）与记忆 PostgreSQL 各司其职，避免把 LangGraph checkpoint 与 ORM 混在同一库实例却不做隔离。  
+4. **连接池**：`DB_POOL_*` 请按并发与数据库 `max_connections` 调整。  
+5. **备份**：定期备份 MySQL业务库与 PostgreSQL 记忆库（若需保留对话历史）。
 
-### 应用迁移
+---
 
-```bash
-alembic upgrade head
-```
+## 8. 故障排查
 
-## 项目结构
-
-```
-app/
-├── database.py          # 数据库连接和会话管理
-├── models/
-│   ├── __init__.py
-│   └── user.py          # 用户表模型
-├── core/
-│   └── config.py        # 配置文件（包含数据库配置）
-└── routers/
-    ├── auth.py          # 认证路由（使用数据库）
-    └── users.py         # 用户管理路由（使用数据库）
-```
-
-## 注意事项
-
-1. **生产环境**：不要使用SQLite，应使用PostgreSQL或MySQL
-2. **密码安全**：密码使用bcrypt加密存储，不会明文保存
-3. **数据库文件**：SQLite数据库文件 `app.db` 应在 `.gitignore` 中
-4. **备份**：定期备份数据库文件
-5. **连接池**：生产环境应根据实际负载调整连接池大小
-
-## 故障排查
-
-### 问题：数据库文件未创建
-
-**解决方案**：检查 `DATABASE_URL` 配置是否正确，确保应用有写入权限。
-
-### 问题：表已存在错误
-
-**解决方案**：删除 `app.db` 文件，重启应用会自动重新创建。
-
-### 问题：连接超时
-
-**解决方案**：检查数据库服务是否运行，网络连接是否正常，`DATABASE_URL` 配置是否正确。
-
+| 现象 | 排查方向 |
+|------|-----------|
+| 无法连接业务库 | 检查 `DATABASE_URL`、防火墙、用户权限、库名是否存在 |
+| SQLite 权限错误 | 确认进程对 `app.db` 路径有读写权限 |
+| 启动失败 / 记忆库报错 | 检查 `AGENT_MEMORY_DATABASE_URL` 或 `DB_*`，确认 PostgreSQL 已启动且库已创建 |
+| 表已存在或结构不一致 | 开发环境可谨慎清理后重建；生产应使用迁移工具 |
