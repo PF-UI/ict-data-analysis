@@ -140,7 +140,7 @@ const initMap = async (year: number, el: HTMLElement, data: LocationStatistics) 
 const loadLocationStatistics = async () => {
   try {
     // 并行加载地图数据和统计数据，不等待地图数据
-    const [mapData, statistics] = await Promise.all([
+    const [, statistics] = await Promise.all([
       loadChinaMap().catch(() => null), // 允许地图加载失败，使用备用方案
       jobListingService.getLocationStatistics(2022, 2026)
     ])

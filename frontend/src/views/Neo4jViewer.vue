@@ -79,7 +79,7 @@
         </template>
         <el-table :data="queryResults" border stripe max-height="400">
           <el-table-column
-            v-for="(value, key) in queryResults[0]"
+            v-for="(_cell, key) in queryResults[0]"
             :key="key"
             :prop="key"
             :label="key"

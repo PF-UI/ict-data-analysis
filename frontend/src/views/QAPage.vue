@@ -64,7 +64,7 @@
                 type="primary"
                 @click="handleSubmit"
                 :loading="loading"
-                :disabled="!currentQuestion.trim()"
+                :disabled="sendDisabled"
               >
                 发送
               </el-button>
@@ -78,7 +78,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, nextTick, onBeforeUnmount, onMounted } from 'vue'
+import { ref, computed, nextTick, onBeforeUnmount, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { User, ChatDotRound } from '@element-plus/icons-vue'
 import { qaService, type ChatMessageItem, type ChatSessionItem } from '@/services/qa'
@@ -99,6 +99,7 @@ const sessionsLoading = ref(false)
 const currentSessionId = ref('')
 const messages = ref<Message[]>([])
 const currentQuestion = ref('')
+const sendDisabled = computed(() => !currentQuestion.value.trim())
 const loading = ref(false)
 const currentAnswerIndex = ref(-1)
 const closeWS = ref<(() => void) | null>(null)

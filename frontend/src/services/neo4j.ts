@@ -27,53 +27,50 @@ export interface SearchRequest {
   limit?: number
 }
 
+/** api 拦截器已解包为 response.data，此处显式标注返回类型 */
+export interface Neo4jStats {
+  nodes: Record<string, number>
+  relationships: Record<string, number>
+}
+
+export interface QueryExecuteResult {
+  results?: any[]
+}
+
+export interface NodesListResult {
+  nodes?: Neo4jNode[]
+}
+
+export interface BrowserUrlResult {
+  url: string
+}
+
 export const neo4jService = {
-  /**
-   * 获取统计信息
-   */
-  async getStats() {
-    return api.get('/neo4j/stats')
+  async getStats(): Promise<Neo4jStats> {
+    return api.get('/neo4j/stats') as Promise<Neo4jStats>
   },
 
-  /**
-   * 执行 Cypher 查询
-   */
-  async executeQuery(request: QueryRequest) {
-    return api.post('/neo4j/query', request)
+  async executeQuery(request: QueryRequest): Promise<QueryExecuteResult> {
+    return api.post('/neo4j/query', request) as Promise<QueryExecuteResult>
   },
 
-  /**
-   * 搜索节点
-   */
-  async searchNodes(request: SearchRequest) {
-    return api.post('/neo4j/search', request)
+  async searchNodes(request: SearchRequest): Promise<NodesListResult> {
+    return api.post('/neo4j/search', request) as Promise<NodesListResult>
   },
 
-  /**
-   * 获取所有节点
-   */
-  async getNodes(limit = 100) {
-    return api.get('/neo4j/nodes', { params: { limit } })
+  async getNodes(limit = 100): Promise<NodesListResult> {
+    return api.get('/neo4j/nodes', { params: { limit } }) as Promise<NodesListResult>
   },
 
-  /**
-   * 根据 ID 获取节点
-   */
-  async getNodeById(nodeId: number) {
+  async getNodeById(nodeId: number): Promise<any> {
     return api.get(`/neo4j/nodes/${nodeId}`)
   },
 
-  /**
-   * 获取所有关系
-   */
   async getRelationships(limit = 100) {
     return api.get('/neo4j/relationships', { params: { limit } })
   },
 
-  /**
-   * 获取 Neo4j Browser URL
-   */
-  async getBrowserUrl() {
-    return api.get('/neo4j/browser/url')
+  async getBrowserUrl(): Promise<BrowserUrlResult> {
+    return api.get('/neo4j/browser/url') as Promise<BrowserUrlResult>
   },
 }

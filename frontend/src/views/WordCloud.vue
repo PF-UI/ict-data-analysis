@@ -201,11 +201,11 @@ const renderWordCloud = () => {
           }
         },
         emphasis: {
-          focus: 'self', // 聚焦时只高亮当前项
+          focus: 'self',
           textStyle: {
-            shadowBlur: 10,
-            shadowColor: '#333'
-          }
+            fontWeight: 'bolder',
+            color: '#333',
+          },
         },
         data: data,
         // 添加宽度和高度设置，确保词云在容器内正确布局
