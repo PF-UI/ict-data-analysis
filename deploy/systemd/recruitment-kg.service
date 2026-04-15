@@ -1,0 +1,19 @@
+[Unit]
+Description=Recruitment KG FastAPI (uvicorn)
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/recruitment_kg
+Environment=PATH=/opt/recruitment_kg/.venv/bin
+ExecStart=/opt/recruitment_kg/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8000
+Restart=on-failure
+RestartSec=5
+
+# 可选：限制资源
+# MemoryMax=2G
+
+[Install]
+WantedBy=multi-user.target
