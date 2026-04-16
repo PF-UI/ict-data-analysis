@@ -89,8 +89,8 @@ const loadChinaMap = async () => {
   }
 
   try {
-    // 从阿里云 DataV 获取中国地图 GeoJSON 数据
-    const response = await fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json')
+    // 从本地静态资源加载中国地图 GeoJSON，避免第三方防盗链导致线上不可用
+    const response = await fetch('/maps/china-100000_full.json')
     const data = await response.json()
     chinaMapData.value = data
     
@@ -140,7 +140,7 @@ const initMap = async (year: number, el: HTMLElement, data: LocationStatistics) 
 const loadLocationStatistics = async () => {
   try {
     // 并行加载地图数据和统计数据，不等待地图数据
-    const [, statistics] = await Promise.all([
+    const [mapData, statistics] = await Promise.all([
       loadChinaMap().catch(() => null), // 允许地图加载失败，使用备用方案
       jobListingService.getLocationStatistics(2022, 2026)
     ])
