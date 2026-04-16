@@ -64,7 +64,7 @@
                 type="primary"
                 @click="handleSubmit"
                 :loading="loading"
-                :disabled="sendDisabled"
+                :disabled="!currentQuestion.trim()"
               >
                 发送
               </el-button>
@@ -78,7 +78,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, nextTick, onBeforeUnmount, onMounted } from 'vue'
+import { ref, nextTick, onBeforeUnmount, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { User, ChatDotRound } from '@element-plus/icons-vue'
 import { qaService, type ChatMessageItem, type ChatSessionItem } from '@/services/qa'
@@ -99,11 +99,28 @@ const sessionsLoading = ref(false)
 const currentSessionId = ref('')
 const messages = ref<Message[]>([])
 const currentQuestion = ref('')
-const sendDisabled = computed(() => !currentQuestion.value.trim())
 const loading = ref(false)
 const currentAnswerIndex = ref(-1)
 const closeWS = ref<(() => void) | null>(null)
 const messagesRef = ref<HTMLElement>()
+
+function generateSessionId() {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID()
+  }
+
+  if (typeof crypto !== 'undefined' && typeof crypto.getRandomValues === 'function') {
+    const bytes = new Uint8Array(16)
+    crypto.getRandomValues(bytes)
+    bytes[6] = (bytes[6] & 0x0f) | 0x40
+    bytes[8] = (bytes[8] & 0x3f) | 0x80
+
+    const hex = Array.from(bytes, (b) => b.toString(16).padStart(2, '0'))
+    return `${hex.slice(0, 4).join('')}-${hex.slice(4, 6).join('')}-${hex.slice(6, 8).join('')}-${hex.slice(8, 10).join('')}-${hex.slice(10, 16).join('')}`
+  }
+
+  return `sid-${Date.now()}-${Math.random().toString(16).slice(2)}`
+}
 
 const formatTime = (date: Date = new Date()) => {
   return date.toLocaleTimeString('zh-CN', {
@@ -187,7 +204,7 @@ function startNewSession() {
   }
   loading.value = false
   currentAnswerIndex.value = -1
-  const id = crypto.randomUUID()
+  const id = generateSessionId()
   persistSessionId(id)
   messages.value = []
   currentQuestion.value = ''
@@ -197,7 +214,7 @@ async function initFromStorage() {
   await loadSessions()
   let id = localStorage.getItem(SESSION_STORAGE_KEY)?.trim()
   if (!id) {
-    id = crypto.randomUUID()
+    id = generateSessionId()
     localStorage.setItem(SESSION_STORAGE_KEY, id)
   }
   currentSessionId.value = id
@@ -225,7 +242,7 @@ const handleSubmit = async () => {
     closeWS.value = null
   }
 
-  const sid = currentSessionId.value || crypto.randomUUID()
+  const sid = currentSessionId.value || generateSessionId()
   if (!currentSessionId.value) {
     persistSessionId(sid)
   }
